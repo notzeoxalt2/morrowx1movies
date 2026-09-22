@@ -1,0 +1,591 @@
+[
+  {
+    "id": "4khdhub-1",
+    "name": "4KHDHub 1",
+    "originalId": "4khdhub",
+    "sourcePackage": "Morrow-1-Yoruix",
+    "sourcePackageName": "Morrow 1 - Yoruix Providers",
+    "sourceFile": "providers/4khdhub.js",
+    "declaredFormats": [
+      "mkv"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 5,
+    "streamCases": 6
+  },
+  {
+    "id": "uhdmovies-1",
+    "name": "UHDMovies 1",
+    "originalId": "uhdmovies",
+    "sourcePackage": "Morrow-1-Yoruix",
+    "sourcePackageName": "Morrow 1 - Yoruix Providers",
+    "sourceFile": "providers/uhdmovies.js",
+    "declaredFormats": [
+      "mkv"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 2,
+    "streamCases": 5
+  },
+  {
+    "id": "dvdplay-1",
+    "name": "DVDPlay 1",
+    "originalId": "dvdplay",
+    "sourcePackage": "Morrow-1-Yoruix",
+    "sourcePackageName": "Morrow 1 - Yoruix Providers",
+    "sourceFile": "providers/dvdplay.js",
+    "declaredFormats": [
+      "mkv"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 2,
+    "streamCases": 2
+  },
+  {
+    "id": "castle-1",
+    "name": "Castle 1",
+    "originalId": "castle",
+    "sourcePackage": "Morrow-1-Yoruix",
+    "sourcePackageName": "Morrow 1 - Yoruix Providers",
+    "sourceFile": "providers/castle.js",
+    "declaredFormats": [
+      "mp4",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "hdhub4u-1",
+    "name": "HDHub4u 1",
+    "originalId": "hdhub4u",
+    "sourcePackage": "Morrow-1-Yoruix",
+    "sourcePackageName": "Morrow 1 - Yoruix Providers",
+    "sourceFile": "providers/hdhub4u.js",
+    "declaredFormats": [
+      "mkv",
+      "mp4"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 1,
+    "streamCases": 3
+  },
+  {
+    "id": "castle-2",
+    "name": "🏰 Castle 2",
+    "originalId": "castle",
+    "sourcePackage": "Morrow-2-D3adly",
+    "sourcePackageName": "Morrow 2 - D3adly Providers",
+    "sourceFile": "providers/castle.js",
+    "declaredFormats": [
+      "mp4",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "movix-1",
+    "name": "Movix VF 1",
+    "originalId": "movix",
+    "sourcePackage": "Morrow-2-D3adly",
+    "sourcePackageName": "Morrow 2 - D3adly Providers",
+    "sourceFile": "providers/movix.js",
+    "declaredFormats": [
+      "mp4",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "playimdb-1",
+    "name": "PlayIMDb 1",
+    "originalId": "playimdb",
+    "sourcePackage": "Morrow-2-D3adly",
+    "sourcePackageName": "Morrow 2 - D3adly Providers",
+    "sourceFile": "providers/playimdb.js",
+    "declaredFormats": [
+      "mp4",
+      "mkv",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "topcartoons",
+    "name": "TopCartoons",
+    "originalId": "topcartoons",
+    "sourcePackage": "Morrow-2-D3adly",
+    "sourcePackageName": "Morrow 2 - D3adly Providers",
+    "sourceFile": "providers/topcartoons.js",
+    "declaredFormats": [
+      "mp4",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 4,
+    "streamCases": 4
+  },
+  {
+    "id": "kisskh",
+    "name": "Kisskh",
+    "originalId": "kisskh",
+    "sourcePackage": "Morrow-3-Michat88",
+    "sourcePackageName": "Morrow 3 - Michat88 Providers",
+    "sourceFile": "providers/kisskh.js",
+    "declaredFormats": [
+      "mp4",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 4,
+    "streamCases": 4
+  },
+  {
+    "id": "castle-3",
+    "name": "Castle 3",
+    "originalId": "castle",
+    "sourcePackage": "Morrow-3-Michat88",
+    "sourcePackageName": "Morrow 3 - Michat88 Providers",
+    "sourceFile": "providers/castle.js",
+    "declaredFormats": [
+      "mp4",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "movix-2",
+    "name": "Movix VF 2",
+    "originalId": "movix",
+    "sourcePackage": "Morrow-3-Michat88",
+    "sourcePackageName": "Morrow 3 - Michat88 Providers",
+    "sourceFile": "providers/movix.js",
+    "declaredFormats": [
+      "mp4",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "playimdb-2",
+    "name": "PlayIMDb 2",
+    "originalId": "playimdb",
+    "sourcePackage": "Morrow-3-Michat88",
+    "sourcePackageName": "Morrow 3 - Michat88 Providers",
+    "sourceFile": "providers/playimdb.js",
+    "declaredFormats": [
+      "mp4",
+      "mkv",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "4khdhub-2",
+    "name": "4KHDHub 2",
+    "originalId": "4khdhub",
+    "sourcePackage": "Morrow-4-Spidey",
+    "sourcePackageName": "Morrow 4 - Spidey Providers",
+    "sourceFile": "src/providers/4khdhub.js",
+    "declaredFormats": [
+      "mkv"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 5,
+    "streamCases": 6
+  },
+  {
+    "id": "uhdmovies-2",
+    "name": "UHDMovies 2",
+    "originalId": "uhdmovies",
+    "sourcePackage": "Morrow-4-Spidey",
+    "sourcePackageName": "Morrow 4 - Spidey Providers",
+    "sourceFile": "src/providers/uhdmovies.js",
+    "declaredFormats": [
+      "mkv"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 2,
+    "streamCases": 5
+  },
+  {
+    "id": "dvdplay-2",
+    "name": "DVDPlay 2",
+    "originalId": "dvdplay",
+    "sourcePackage": "Morrow-4-Spidey",
+    "sourcePackageName": "Morrow 4 - Spidey Providers",
+    "sourceFile": "src/providers/dvdplay.js",
+    "declaredFormats": [
+      "mkv"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 2,
+    "streamCases": 2
+  },
+  {
+    "id": "castle-4",
+    "name": "Castle 4",
+    "originalId": "castle",
+    "sourcePackage": "Morrow-4-Spidey",
+    "sourcePackageName": "Morrow 4 - Spidey Providers",
+    "sourceFile": "src/providers/castle.js",
+    "declaredFormats": [
+      "mp4",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "hdhub4u-2",
+    "name": "HDHub4u 2",
+    "originalId": "hdhub4u",
+    "sourcePackage": "Morrow-4-Spidey",
+    "sourcePackageName": "Morrow 4 - Spidey Providers",
+    "sourceFile": "src/providers/hdhub4u.js",
+    "declaredFormats": [
+      "mkv",
+      "mp4"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 1,
+    "streamCases": 4
+  },
+  {
+    "id": "movix-3",
+    "name": "Movix VF 3",
+    "originalId": "movix",
+    "sourcePackage": "Morrow-4-Spidey",
+    "sourcePackageName": "Morrow 4 - Spidey Providers",
+    "sourceFile": "src/providers/movix.js",
+    "declaredFormats": [
+      "mp4",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "playimdb-3",
+    "name": "PlayIMDb 3",
+    "originalId": "playimdb",
+    "sourcePackage": "Morrow-4-Spidey",
+    "sourcePackageName": "Morrow 4 - Spidey Providers",
+    "sourceFile": "src/providers/playimdb.js",
+    "declaredFormats": [
+      "mp4",
+      "mkv",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "moonvidmodyfilmdizi",
+    "name": "MoonVidmodyFilmDizi",
+    "originalId": "moonvidmodyfilmdizi",
+    "sourcePackage": "Morrow-5-Mooncrown",
+    "sourcePackageName": "Morrow 5 - Mooncrown Providers",
+    "sourceFile": "providers/moonvidmodyfilmdizi.js",
+    "declaredFormats": [
+      "mp4",
+      "mkv",
+      "hls",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "4khdhub-3",
+    "name": "4KHDHub 3",
+    "originalId": "4khdhub",
+    "sourcePackage": "Morrow-5-Mooncrown",
+    "sourcePackageName": "Morrow 5 - Mooncrown Providers",
+    "sourceFile": "providers/4khdhub.js",
+    "declaredFormats": [
+      "mkv"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 5,
+    "streamCases": 6
+  },
+  {
+    "id": "uhdmovies-3",
+    "name": "UHDMovies 3",
+    "originalId": "uhdmovies",
+    "sourcePackage": "Morrow-5-Mooncrown",
+    "sourcePackageName": "Morrow 5 - Mooncrown Providers",
+    "sourceFile": "providers/uhdmovies.js",
+    "declaredFormats": [
+      "mkv"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 1,
+    "streamCases": 4
+  },
+  {
+    "id": "dvdplay-3",
+    "name": "DVDPlay 3",
+    "originalId": "dvdplay",
+    "sourcePackage": "Morrow-5-Mooncrown",
+    "sourcePackageName": "Morrow 5 - Mooncrown Providers",
+    "sourceFile": "providers/dvdplay.js",
+    "declaredFormats": [
+      "mkv"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 2,
+    "streamCases": 2
+  },
+  {
+    "id": "castle-5",
+    "name": "Castle 5",
+    "originalId": "castle",
+    "sourcePackage": "Morrow-5-Mooncrown",
+    "sourcePackageName": "Morrow 5 - Mooncrown Providers",
+    "sourceFile": "providers/castle.js",
+    "declaredFormats": [
+      "mp4",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "hdhub4u-3",
+    "name": "HDHub4u 3",
+    "originalId": "hdhub4u",
+    "sourcePackage": "Morrow-5-Mooncrown",
+    "sourcePackageName": "Morrow 5 - Mooncrown Providers",
+    "sourceFile": "providers/hdhub4u.js",
+    "declaredFormats": [
+      "mkv",
+      "mp4"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 1,
+    "streamCases": 3
+  },
+  {
+    "id": "movix-4",
+    "name": "Movix VF 4",
+    "originalId": "movix",
+    "sourcePackage": "Morrow-5-Mooncrown",
+    "sourcePackageName": "Morrow 5 - Mooncrown Providers",
+    "sourceFile": "providers/movix.js",
+    "declaredFormats": [
+      "mp4",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "playimdb-4",
+    "name": "PlayIMDb 4",
+    "originalId": "playimdb",
+    "sourcePackage": "Morrow-5-Mooncrown",
+    "sourcePackageName": "Morrow 5 - Mooncrown Providers",
+    "sourceFile": "providers/playimdb.js",
+    "declaredFormats": [
+      "mp4",
+      "mkv",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 6,
+    "streamCases": 6
+  },
+  {
+    "id": "netnaija",
+    "name": "NetNaija",
+    "originalId": "netnaija",
+    "sourcePackage": "Morrow-6-Requested",
+    "sourcePackageName": "Morrow 6 - Requested Movie and TV Providers",
+    "sourceFile": "providers/netnaija-film.js",
+    "declaredFormats": [
+      "mp4",
+      "mkv",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 5,
+    "streamCases": 5
+  },
+  {
+    "id": "hdhub4u-4",
+    "name": "HDHub4u 4",
+    "originalId": "hdhub4u",
+    "sourcePackage": "Morrow-6-Requested",
+    "sourcePackageName": "Morrow 6 - Requested Movie and TV Providers",
+    "sourceFile": "providers/hdhub4u.js",
+    "declaredFormats": [
+      "mp4",
+      "mkv",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 1,
+    "streamCases": 6
+  },
+  {
+    "id": "world4ufree",
+    "name": "World4uFree",
+    "originalId": "world4ufree",
+    "sourcePackage": "Morrow-6-Requested",
+    "sourcePackageName": "Morrow 6 - Requested Movie and TV Providers",
+    "sourceFile": "providers/world4ufree-beer.js",
+    "declaredFormats": [
+      "mp4",
+      "mkv",
+      "m3u8"
+    ],
+    "supportedTypes": [
+      "movie",
+      "tv"
+    ],
+    "testedCases": 6,
+    "playableCases": 5,
+    "streamCases": 5
+  }
+]
