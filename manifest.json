@@ -1,7 +1,7 @@
 {
   "name": "Morrow Movies and TV - Confirmed",
-  "version": "1.0.0",
-  "description": "One flat package containing confirmed movie and TV providers from Morrow 1-6.",
+  "version": "1.1.0",
+  "description": "One flat package containing confirmed movie and TV providers from Morrow 1-6, with direct-link and title-safety filtering.",
   "scrapers": [
     {
       "id": "4khdhub-1",
@@ -13,8 +13,8 @@
         "movie",
         "tv"
       ],
-      "filename": "providers/4khdhub-1.js",
-      "enabled": true,
+        "filename": "providers/4khdhub-1.js",
+        "enabled": true,
       "formats": [
         "mkv"
       ],
@@ -99,7 +99,7 @@
       "id": "hdhub4u-1",
       "name": "HDHub4u 1",
       "description": "Direct links from HDHub4u with high-speed download support [Source: Morrow 1 - Yoruix Providers]",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": "Nuvio Team",
       "supportedTypes": [
         "movie",
@@ -403,7 +403,7 @@
       "id": "hdhub4u-2",
       "name": "HDHub4u 2",
       "description": "Verified direct links with high-speed download support [Source: Morrow 4 - Spidey Providers]",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": "Nuvio Team",
       "supportedTypes": [
         "movie",
@@ -479,8 +479,8 @@
         "movie",
         "tv"
       ],
-      "filename": "providers/moonvidmodyfilmdizi.js",
-      "enabled": true,
+        "filename": "providers/moonvidmodyfilmdizi.js",
+        "enabled": false,
       "formats": [
         "mp4",
         "mkv",
@@ -590,7 +590,7 @@
       "id": "hdhub4u-3",
       "name": "HDHub4u 3",
       "description": "Verified direct links with high-speed download support [Source: Morrow 5 - Mooncrown Providers]",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": "Nuvio Team",
       "supportedTypes": [
         "movie",
@@ -666,8 +666,8 @@
         "movie",
         "tv"
       ],
-      "filename": "providers/netnaija.js",
-      "enabled": true,
+        "filename": "providers/netnaija.js",
+        "enabled": false,
       "formats": [
         "mp4",
         "mkv",
@@ -680,7 +680,7 @@
       "id": "hdhub4u-4",
       "name": "HDHub4u 4",
       "description": "HDHub4u provider from the upstream Nuvio implementation [Source: Morrow 6 - Requested Movie and TV Providers]",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": "Morrow",
       "supportedTypes": [
         "movie",

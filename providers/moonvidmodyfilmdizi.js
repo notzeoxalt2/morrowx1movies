@@ -37,9 +37,13 @@ async function getStreams(tmdbId, mediaType, season, episode) {
         try {
             const checkRes = await fetch(targetUrl, { method: 'HEAD' });
             
-            if (checkRes.status === 200) {
+            const contentType = (checkRes.headers.get('content-type') || '').toLowerCase();
+            const resolvedUrl = checkRes.url || targetUrl;
+            if (checkRes.status === 200 &&
+                /(?:video\/|mpegurl)/i.test(contentType) &&
+                /\.(?:m3u8|mp4|mkv|webm)(?:$|\?)/i.test(resolvedUrl)) {
                 return [{
-                    url: targetUrl,
+                    url: resolvedUrl,
                     name: `Vidmody`,
                     title: displayTitle,
                     quality: "Auto",

@@ -1,5 +1,3 @@
-const cheerio = require('cheerio-without-node-native');
-
 // Konstanta dari file Adicinemax21Extractor.kt
 const MAIN_URL = "https://kisskh.ovh";
 // URL Google Script untuk generate key (PENTING)

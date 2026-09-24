@@ -205,6 +205,11 @@ function getIndexQuality(str) {
     return "2160p";
   return "Unknown";
 }
+function isPlayableMediaUrl(url) {
+  if (!/^https?:\/\//i.test(url || "")) return false;
+  if (/(?:href\.li|unblockedgames|r\?key=|hubcloud|hubdrive)/i.test(url)) return false;
+  return /\.(?:m3u8|mp4|mkv|webm)(?:[?#]|$)/i.test(url) || /(?:r2\.cloudflarestorage\.com|cloudflarestorage\.com|googleusercontent\.com|pixeldrain\.(?:net|dev)\/api\/file|drive\.google\.com\/uc\?)/i.test(url);
+}
 function extractVideoSeed(finallink) {
   return __async(this, null, function* () {
     try {
@@ -388,7 +393,7 @@ function getStreams(tmdbId, mediaType, seasonNum = 1, episodeNum = 1) {
           }
         }
       }
-      return finalResults;
+      return finalResults.filter((stream) => isPlayableMediaUrl(stream.url));
     } catch (e) {
       console.error("[UHDMovies] Error:", e.message);
       return [];

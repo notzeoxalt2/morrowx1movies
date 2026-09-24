@@ -80,13 +80,16 @@ function calculateSimilarity(str1, str2) {
 function makeRequest(url, options = {}) {
     return new Promise((resolve, reject) => {
         const urlObj = new URL(url);
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), options.timeout || 12000);
         const fetchOptions = {
             method: options.method || 'GET',
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
                 ...options.headers
             },
-            timeout: 30000
+            timeout: 30000,
+            signal: controller.signal
         };
 
         fetch(url, fetchOptions)
@@ -106,7 +109,8 @@ function makeRequest(url, options = {}) {
                     }
                 });
             })
-            .catch(reject);
+            .catch(reject)
+            .finally(() => clearTimeout(timer));
     });
 }
 
@@ -642,14 +646,20 @@ function searchContent(title, year, mediaType) {
     return makeHTTPRequest(searchUrl)
         .then(response => response.text())
         .then(html => {
-            const moviePageRegex = /<a href="([^"]+)"[^>]*>\s*<p class="home">/g;
+            const moviePageRegex = /<a href="([^"]+)"[^>]*>\s*<p class="home">([\s\S]*?)<\/p>/g;
             const results = [];
             let match;
 
             while ((match = moviePageRegex.exec(html)) !== null) {
+                const resultTitle = match[2].replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&amp;/gi, ' ').replace(/[»]/g, ' ').replace(/\s+/g, ' ').trim();
+                const wantedWords = normalizeTitle(title).split(' ').filter(word => word.length > 2);
+                const normalizedResult = normalizeTitle(resultTitle);
+                const resultYear = resultTitle.match(/\b(19|20)\d{2}\b/);
+                if (!wantedWords.every(word => normalizedResult.includes(word))) continue;
+                if (year && resultYear && Math.abs(Number(year) - Number(resultYear[0])) > 1) continue;
                 const movieUrl = new URL(match[1], BASE_URL).href;
                 results.push({
-                    title: title, // We'll extract the actual title later
+                    title: resultTitle,
                     url: movieUrl
                 });
             }
@@ -688,9 +698,11 @@ function searchFromMainPage(title, year) {
                 const pageTitle = match[2].trim();
 
                 // Simple matching - check if title words appear in the page title
-                if (titleLower.split(' ').some(word =>
-                    word.length > 2 && pageTitle.toLowerCase().includes(word)
-                )) {
+                const wantedWords = normalizeTitle(title).split(' ').filter(word => word.length > 2);
+                const normalizedPageTitle = normalizeTitle(pageTitle);
+                const pageYear = pageTitle.match(/\b(19|20)\d{2}\b/);
+                if (wantedWords.every(word => normalizedPageTitle.includes(word)) &&
+                    (!year || !pageYear || Math.abs(Number(year) - Number(pageYear[0])) <= 1)) {
                     results.push({
                         title: pageTitle,
                         url: pageUrl
@@ -825,6 +837,13 @@ function getServiceName(url) {
     }
 }
 
+function isPlayableUrl(url) {
+    if (!/^https?:\/\//i.test(url || '')) return false;
+    if (/(?:hubcloud|hubdrive|\.fans\/|360news4u\.net\/dl\.php|gamerxyt\.com\/dl\.php|href\.li)/i.test(url)) return false;
+    return /\.(?:m3u8|mp4|mkv|webm|avi|m4v)(?:[?#]|$)/i.test(url) ||
+        /(?:r2\.cloudflarestorage\.com|cloudflarestorage\.com|video-downloads\.googleusercontent\.com|pixeldrain\.(?:net|dev)\/api\/file|drive\.google\.com\/uc\?|streamtape|filemoon|gofile|gdflix|filepress)/i.test(url);
+}
+
 // TMDB helper (from 4KHDHub)
 function getTMDBDetails(tmdbId, mediaType) {
     var url = 'https://api.themoviedb.org/3/' + mediaType + '/' + tmdbId + '?api_key=' + TMDB_API_KEY;
@@ -890,7 +909,7 @@ function getStreams(tmdbId, mediaType = 'movie', seasonNum = null, episodeNum = 
                 // 4. Process download links to get final streams
                 const streamPromises = downloadLinks.map(link => processDownloadLink(link));
                 return Promise.all(streamPromises).then(nestedStreams => {
-                    let allStreams = nestedStreams.flat();
+                    let allStreams = nestedStreams.flat().filter(stream => isPlayableUrl(stream.url));
 
                     // 5. Filter out unwanted links (e.g., Google AMP links, suspicious domains)
                     allStreams = allStreams.filter(stream => {

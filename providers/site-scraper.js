@@ -160,10 +160,27 @@ function searchUrls(baseUrl, title, type, season, episode) {
 
 function scoreLink(url, title, year) {
   const haystack = normalized(url);
-  const words = normalized(title).split(" ").filter((word) => word.length > 2);
+  const stopWords = new Set(["the", "a", "an", "of", "and", "to", "in", "on", "for", "with", "from", "at", "by"]);
+  const words = normalized(title).split(" ").filter((word) => word.length > 2 && !stopWords.has(word));
+  const candidateYear = haystack.match(/\b(19|20)\d{2}\b/)?.[0];
+  if (year && candidateYear && Math.abs(Number(year) - Number(candidateYear)) > 1) return -Infinity;
   let score = words.filter((word) => haystack.includes(word)).length * 10;
   if (year && haystack.includes(String(year))) score += 8;
   return score;
+}
+
+function isSearchPage(url) {
+  try {
+    const parsed = new URL(url);
+    return /\/(?:search|category|tag)(?:\/|$)/i.test(parsed.pathname) || /(?:^|[?&])(?:s|q|query)=/i.test(parsed.search);
+  } catch (_) {
+    return true;
+  }
+}
+
+function pageTitleMatches(html, title) {
+  const pageTitle = String(html || '').match(/<title[^>]*>([^<]*)<\/title>/i)?.[1];
+  return !pageTitle || normalized(pageTitle).includes(normalized(title));
 }
 
 async function collectPageStreams(pageUrl, html, siteName) {
@@ -221,8 +238,9 @@ function createSiteProvider({ name, baseUrl }) {
         }
         const candidates = [];
         for (const page of pages) {
-          candidates.push(page);
+          if (!isSearchPage(page.url) && pageTitleMatches(page.html, info.title)) candidates.push(page);
           const links = pageLinks(page.html, page.url, new URL(base).hostname)
+            .filter((url) => scoreLink(url, info.title, info.year) >= 10)
             .sort((a, b) => scoreLink(b, info.title, info.year) - scoreLink(a, info.title, info.year))
             .slice(0, 4);
           const linked = await Promise.allSettled(links.map((url) => fetchText(url, page.url)));
