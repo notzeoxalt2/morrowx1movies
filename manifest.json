@@ -1,6 +1,6 @@
 {
   "name": "Morrow Movies and TV - Confirmed",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "One flat package containing confirmed movie and TV providers from Morrow 1-6, with direct-link and title-safety filtering.",
   "scrapers": [
     {
@@ -13,8 +13,8 @@
         "movie",
         "tv"
       ],
-        "filename": "providers/4khdhub-1.js",
-        "enabled": true,
+      "filename": "providers/4khdhub-1.js",
+      "enabled": false,
       "formats": [
         "mkv"
       ],
@@ -35,7 +35,7 @@
         "tv"
       ],
       "filename": "providers/uhdmovies-1.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mkv"
       ],
@@ -56,7 +56,7 @@
         "tv"
       ],
       "filename": "providers/dvdplay-1.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mkv"
       ],
@@ -79,7 +79,7 @@
         "tv"
       ],
       "filename": "providers/castle-1.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mp4",
         "m3u8"
@@ -106,7 +106,7 @@
         "tv"
       ],
       "filename": "providers/hdhub4u-1.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mkv",
         "mp4"
@@ -129,7 +129,7 @@
         "tv"
       ],
       "filename": "providers/castle-2.js",
-      "enabled": true,
+      "enabled": false,
       "hasSettings": true,
       "formats": [
         "mp4",
@@ -143,15 +143,15 @@
     },
     {
       "id": "movix-1",
-      "name": "Movix VF 1",
-      "description": "Movies and TV series in English & French (dubbed/subtitled) [Source: Morrow 2 - D3adly Providers]",
-      "version": "1.0.0",
+      "name": "Movix",
+      "description": "Verified HLS movies and TV streams with quality labels [Source: Morrow 2 - D3adly Providers]",
+      "version": "1.0.1",
       "author": "wooodyhood",
       "supportedTypes": [
         "movie",
         "tv"
       ],
-      "filename": "providers/movix-1.js",
+      "filename": "providers/movix.js",
       "enabled": true,
       "hasSettings": true,
       "formats": [
@@ -201,7 +201,7 @@
         "tv"
       ],
       "filename": "providers/topcartoons.js",
-      "enabled": true,
+      "enabled": false,
       "hasSettings": true,
       "formats": [
         "mp4",
@@ -269,7 +269,7 @@
         "tv"
       ],
       "filename": "providers/movix-2.js",
-      "enabled": true,
+      "enabled": false,
       "hasSettings": true,
       "formats": [
         "mp4",
@@ -293,7 +293,7 @@
         "tv"
       ],
       "filename": "providers/playimdb-2.js",
-      "enabled": true,
+      "enabled": false,
       "hasSettings": true,
       "formats": [
         "mp4",
@@ -318,7 +318,7 @@
         "tv"
       ],
       "filename": "providers/4khdhub-2.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mkv"
       ],
@@ -339,7 +339,7 @@
         "tv"
       ],
       "filename": "providers/uhdmovies-2.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mkv"
       ],
@@ -360,7 +360,7 @@
         "tv"
       ],
       "filename": "providers/dvdplay-2.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mkv"
       ],
@@ -383,7 +383,7 @@
         "tv"
       ],
       "filename": "providers/castle-4.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mp4",
         "m3u8"
@@ -410,7 +410,7 @@
         "tv"
       ],
       "filename": "providers/hdhub4u-2.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mkv",
         "mp4"
@@ -433,7 +433,7 @@
         "tv"
       ],
       "filename": "providers/movix-3.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mp4",
         "m3u8"
@@ -456,7 +456,7 @@
         "tv"
       ],
       "filename": "providers/playimdb-3.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mp4",
         "mkv",
@@ -505,7 +505,7 @@
         "tv"
       ],
       "filename": "providers/4khdhub-3.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mkv"
       ],
@@ -526,7 +526,7 @@
         "tv"
       ],
       "filename": "providers/uhdmovies-3.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mkv"
       ],
@@ -547,7 +547,7 @@
         "tv"
       ],
       "filename": "providers/dvdplay-3.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mkv"
       ],
@@ -570,7 +570,7 @@
         "tv"
       ],
       "filename": "providers/castle-5.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mp4",
         "m3u8"
@@ -597,7 +597,7 @@
         "tv"
       ],
       "filename": "providers/hdhub4u-3.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mkv",
         "mp4"
@@ -620,7 +620,7 @@
         "tv"
       ],
       "filename": "providers/movix-4.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mp4",
         "m3u8"
@@ -643,7 +643,7 @@
         "tv"
       ],
       "filename": "providers/playimdb-4.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mp4",
         "mkv",
@@ -687,7 +687,7 @@
         "tv"
       ],
       "filename": "providers/hdhub4u-4.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mp4",
         "mkv",

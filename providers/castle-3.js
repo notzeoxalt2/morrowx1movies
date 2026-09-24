@@ -133,7 +133,29 @@ function decryptCastle(encryptedB64, securityKeyB64) {
   return __async(this, null, function* () {
     console.log("[Castle] Starting local AES-CBC decryption...");
     try {
-      const CryptoJS = require("crypto-js");
+      let CryptoJS;
+      try {
+        CryptoJS = require("crypto-js");
+      } catch (dependencyError) {
+        const decodeBase64 = (value) => {
+          if (typeof Buffer !== "undefined") return new Uint8Array(Buffer.from(value, "base64"));
+          return new Uint8Array(Array.from(atob(value), (char) => char.charCodeAt(0)));
+        };
+        const securityBytes = decodeBase64(securityKeyB64);
+        const suffixBytes = new TextEncoder().encode("T!BgJB");
+        const keyBytes = new Uint8Array(16);
+        keyBytes.set(securityBytes.slice(0, 16));
+        if (securityBytes.length < 16) keyBytes.set(suffixBytes.slice(0, 16 - securityBytes.length), securityBytes.length);
+        const encryptedBytes = decodeBase64(encryptedB64);
+        if (typeof __crypto_aes_decrypt_raw !== "undefined") {
+          const keyArg = new Int8Array(keyBytes.buffer);
+          const plain = __crypto_aes_decrypt_raw("AES-CBC", keyArg, keyArg, new Int8Array(encryptedBytes.buffer));
+          return new TextDecoder().decode(plain);
+        }
+        const crypto = require("crypto");
+        const decipher = crypto.createDecipheriv("aes-128-cbc", Buffer.from(keyBytes), Buffer.from(keyBytes));
+        return Buffer.concat([decipher.update(Buffer.from(encryptedBytes)), decipher.final()]).toString("utf8");
+      }
       
       // Monkey-patch to bypass NuvioMobile QuickJS JNI typed array mapping bug
       if (typeof __crypto_aes_decrypt_raw !== 'undefined') {
