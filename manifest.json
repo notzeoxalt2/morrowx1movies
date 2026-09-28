@@ -1,135 +1,494 @@
 {
-  "name": "Morrow Movies and TV - Confirmed",
-  "version": "1.1.1",
-  "description": "One flat package containing confirmed movie and TV providers from Morrow 1-6, with direct-link and title-safety filtering.",
+  "name": "Morrow Movies & TV",
+  "version": "1.2.0",
+  "description": "Verified standalone working providers for Morrow Movies & TV",
   "scrapers": [
     {
-      "id": "4khdhub-1",
-      "name": "4KHDHub 1",
-      "description": "4KHDHub direct links [Source: Morrow 1 - Yoruix Providers]",
-      "version": "1.0.2",
+      "id": "4khdhub",
+      "name": "4KHDHub",
+      "description": "4KHDHub direct links",
+      "version": "1.0.1",
       "author": "Nuvio Team",
       "supportedTypes": [
         "movie",
-        "tv"
+        "tv",
+        "anime"
       ],
-      "filename": "providers/4khdhub-1.js",
-      "enabled": false,
-      "formats": [
-        "mkv"
-      ],
-      "logo": "https://www.google.com/s2/favicons?domain=4khdhub.click&sz=128",
-      "contentLanguage": [
-        "en"
-      ],
-      "sourcePackage": "Morrow-1-Yoruix"
-    },
-    {
-      "id": "uhdmovies-1",
-      "name": "UHDMovies 1",
-      "description": "UHD Movies streaming with multiple resolution [Source: Morrow 1 - Yoruix Providers]",
-      "version": "1.2.0",
-      "author": "Nuvio Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/uhdmovies-1.js",
-      "enabled": false,
-      "formats": [
-        "mkv"
-      ],
-      "logo": "https://www.google.com/s2/favicons?domain=uhdmovies.pink&sz=128",
-      "contentLanguage": [
-        "en"
-      ],
-      "sourcePackage": "Morrow-1-Yoruix"
-    },
-    {
-      "id": "dvdplay-1",
-      "name": "DVDPlay 1",
-      "description": "DVDPlay direct download links with HubCloud extraction [Source: Morrow 1 - Yoruix Providers]",
-      "version": "1.0.2",
-      "author": "Nuvio Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/dvdplay-1.js",
-      "enabled": false,
-      "formats": [
-        "mkv"
-      ],
-      "logo": "https://www.google.com/s2/favicons?domain=dvdplay.com&sz=128",
-      "contentLanguage": [
-        "mal",
-        "tam",
-        "hin"
-      ],
-      "sourcePackage": "Morrow-1-Yoruix"
-    },
-    {
-      "id": "castle-1",
-      "name": "Castle 1",
-      "description": "Multi Lang provider [Source: Morrow 1 - Yoruix Providers]",
-      "version": "1.0.0",
-      "author": "Nuvio Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/castle-1.js",
-      "enabled": false,
+      "filename": "providers/4khdhub.js",
+      "enabled": true,
+      "hasSettings": true,
       "formats": [
         "mp4",
         "m3u8"
       ],
-      "logo": "https://static.hbayy.com/simple-blog-13/prod/_nuxt/big-logo.DESZ4mBj.png",
+      "logo": "https://i.postimg.cc/DZpW6Xfb/4khdhub.png",
       "contentLanguage": [
-        "en",
-        "hi",
-        "ta",
-        "te",
-        "ml",
-        "kn"
-      ],
-      "sourcePackage": "Morrow-1-Yoruix"
+        "en"
+      ]
     },
     {
-      "id": "hdhub4u-1",
-      "name": "HDHub4u 1",
-      "description": "Direct links from HDHub4u with high-speed download support [Source: Morrow 1 - Yoruix Providers]",
+      "id": "uhdmovies",
+      "name": "UHDMovies",
+      "description": "UHD Movies streaming with multiple resolution",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/uhdmovies.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/KzDBBdbK/uhdmovies.png",
+      "contentLanguage": [
+        "en"
+      ]
+    },
+    {
+      "id": "vegamovies",
+      "name": "VegaMovies",
+      "description": "VegaMovies streaming with high-quality direct links",
+      "version": "2.0",
+      "author": "piratezoro9",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/vegamovies.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/TwYK26jn/vegamovies.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "moviebox",
+      "name": "MovieBox",
+      "description": "MovieBox streaming with multiple language support (DASH + MP4)",
       "version": "1.2.0",
       "author": "Nuvio Team",
       "supportedTypes": [
         "movie",
-        "tv"
+        "tv",
+        "anime"
       ],
-      "filename": "providers/hdhub4u-1.js",
-      "enabled": false,
+      "filename": "providers/moviebox.js",
+      "enabled": true,
+      "hasSettings": false,
       "formats": [
-        "mkv",
-        "mp4"
+        "mp4",
+        "mpd"
       ],
-      "logo": "https://www.google.com/s2/favicons?domain=new6.hdhub4u.fo&sz=128",
+      "logo": "https://i.postimg.cc/TPwkfqHh/moviebox.png",
       "contentLanguage": [
         "en",
-        "hin"
-      ],
-      "sourcePackage": "Morrow-1-Yoruix"
+        "hi",
+        "ta",
+        "te"
+      ]
     },
     {
-      "id": "castle-2",
-      "name": "🏰 Castle 2",
-      "description": "Multi Lang provider [Source: Morrow 2 - D3adly Providers]",
+      "id": "vidsrc",
+      "name": "VidSrc",
+      "description": "Vidsrc - The best place to watch movies and TV shows online for free. Stream in 1080p HD",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/vidsrc.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/ncMLBsLJ/vidsrc.png",
+      "contentLanguage": [
+        "en"
+      ]
+    },
+    {
+      "id": "vidlink",
+      "name": "VidLink",
+      "description": "Vidlink streaming with encrypted TMDB ID support for movies and TV shows",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/vidlink.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/RZRHQd75/vidlink.png",
+      "contentLanguage": [
+        "en"
+      ]
+    },
+    {
+      "id": "videasy",
+      "name": "VidEasy",
+      "description": "Videasy streaming with encrypted TMDB ID support for movies and TV shows",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/videasy.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/7LHYMtVV/videasy.png",
+      "contentLanguage": [
+        "en"
+      ]
+    },
+    {
+      "id": "showbox",
+      "name": "ShowBox",
+      "description": "ShowBox streaming with multiple quality options and versions",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/showbox.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/8c5XGzsx/showbox.png",
+      "contentLanguage": [
+        "en"
+      ]
+    },
+    {
+      "id": "cineby",
+      "name": "CINEBY",
+      "description": "cineby standalone anime scraper",
+      "version": "1.0.0",
+      "author": "Morrow",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "contentLanguage": [
+        "en",
+        "ja"
+      ],
+      "filename": "providers/cineby.js",
+      "enabled": true
+    },
+    {
+      "id": "cinemacity",
+      "name": "CinemaCity",
+      "description": "Multi Language Provider",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/cinemacity.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/XYjKhS3b/cinemacity.png",
+      "contentLanguage": [
+        "en",
+        "hi",
+        "ar"
+      ]
+    },
+    {
+      "id": "dahmermovies",
+      "name": "Dahmermovies",
+      "description": "1080p Movies from Dahmermovies",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/dahmermovies.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/hGt3dV6Z/dhamermovies.png",
+      "contentLanguage": [
+        "en"
+      ]
+    },
+    {
+      "id": "dahmermovies-4k",
+      "name": "DAHMERMOVIES-4K",
+      "description": "dahmermovies-4k standalone anime scraper",
+      "version": "1.0.0",
+      "author": "Morrow",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "contentLanguage": [
+        "en",
+        "ja"
+      ],
+      "filename": "providers/dahmermovies-4k.js",
+      "enabled": true
+    },
+    {
+      "id": "hdhub4u",
+      "name": "HDHub4u",
+      "description": "Direct links from HDHub4u with high-speed download support",
+      "version": "1.0.1",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/hdhub4u.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/mryRTf0R/hdhub4u.png",
+      "contentLanguage": [
+        "en"
+      ]
+    },
+    {
+      "id": "moviesdrive",
+      "name": "MoviesDrive",
+      "description": "MoviesDrive - Movies and TV shows with multiple streaming servers",
+      "version": "3.0.0",
+      "author": "PirateZoro9",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/moviesdrive.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/bwDbhq9q/moviesdrive.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "moviesmod",
+      "name": "MoviesMod",
+      "description": "Movie and TV show streams from MoviesMod with multiple quality options",
+      "version": "1.0.1",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/moviesmod.js",
+      "enabled": true,
+      "formats": [
+        "mkv"
+      ],
+      "logo": "https://www.google.com/s2/favicons?domain=moviesmod.farm&sz=128",
+      "contentLanguage": [
+        "en"
+      ]
+    },
+    {
+      "id": "movies4u",
+      "name": "Movies4u",
+      "description": "Hollywood, Bollywood movies including web series, & Hindi dubbed movies in HD quality",
+      "version": "1.0.2",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "anime"
+      ],
+      "filename": "providers/movies4u.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/J0QG1QhQ/movies4u.jpg",
+      "contentLanguage": [
+        "en",
+        "hi",
+        "ta"
+      ]
+    },
+    {
+      "id": "movieshunt",
+      "name": "🎬 MoviesHunt",
+      "description": "Hollywood & Bollywood Movies in Multi Language",
+      "version": "1.0.0",
+      "author": "piratezoro9",
+      "supportedTypes": [
+        "movie",
+        "anime"
+      ],
+      "filename": "providers/movieshunt.js",
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/3Rc34LJj/movieshunt.png",
+      "contentLanguage": [
+        "hi",
+        "en"
+      ]
+    },
+    {
+      "id": "allmovieland",
+      "name": "AllMovieLand",
+      "description": "AllMovieLand streaming provider with multi-language support",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/allmovieland.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/hhWqkVQs/allmovieland.png",
+      "contentLanguage": [
+        "en",
+        "hi",
+        "ta",
+        "te"
+      ]
+    },
+    {
+      "id": "kisskh",
+      "name": "💋 Kisskh",
+      "description": "Streams Korean dramas and movies from onlykdrama.top",
+      "version": "1.0.0",
+      "author": "Michat88",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/kisskh.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/2yLnTzPP/kisskh.jpg",
+      "contentLanguage": [
+        "ko",
+        "ch",
+        "ja",
+        "th"
+      ]
+    },
+    {
+      "id": "playimdb",
+      "name": "PlayIMDb",
+      "description": "High-Speed Direct Streaming for Movies (IMDb ID Extract)",
+      "version": "2.0.0",
+      "author": "PirateZoro9",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/playimdb.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/KzjPtYWY/imdb.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "castle",
+      "name": "🏰 Castle",
+      "description": "Multi Lang provider",
       "version": "2.0.0",
       "author": "Nuvio Team",
       "supportedTypes": [
         "movie",
-        "tv"
+        "tv",
+        "anime"
       ],
-      "filename": "providers/castle-2.js",
-      "enabled": false,
+      "filename": "providers/castle.js",
+      "enabled": true,
       "hasSettings": true,
       "formats": [
         "mp4",
@@ -138,18 +497,247 @@
       "logo": "https://i.postimg.cc/0NvGzFyK/castle.png",
       "contentLanguage": [
         "en"
-      ],
-      "sourcePackage": "Morrow-2-D3adly"
+      ]
     },
     {
-      "id": "movix-1",
-      "name": "Movix",
-      "description": "Verified HLS movies and TV streams with quality labels [Source: Morrow 2 - D3adly Providers]",
-      "version": "1.0.1",
+      "id": "cinefreak",
+      "name": "CineFreak",
+      "description": "Direct MKV streams from cinefreak.nl",
+      "version": "1.0.0",
+      "author": "piratezoro9",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/cinefreak.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mkv",
+        "mp4"
+      ],
+      "logo": "https://i.postimg.cc/rpDB2284/cinefreak.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "1shows",
+      "name": "1Shows",
+      "description": "1Shows- Movies | Series in 4k, 1080p, 720p & 480p",
+      "version": "1.0.0",
+      "author": "A2R14N - Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/1shows.js",
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "mkv",
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/9fDVBvn5/1shows.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "ctgmovies",
+      "name": "CTGMovies",
+      "description": "English | Hindi Movies",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/ctgmovies.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "m3u8",
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/jSQmk9B3/ctgmovies.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "desiflix",
+      "name": "DesiFlix",
+      "description": "Bollywood, Hollywood, and South Indian movies, in Dual Language",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/desiflix.js",
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "mp4",
+        "mkv",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/Vvs4fmwM/desiflix.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "einthusan",
+      "name": "Einthustan",
+      "description": "1080p Movies in Multi-Lang",
+      "version": "1.0.0",
+      "author": "✮☆[D3ADLY]☆✮",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/einthusan.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/QCFYLyRR/einthusan.png",
+      "contentLanguage": [
+        "hi",
+        "ta",
+        "te",
+        "ba"
+      ]
+    },
+    {
+      "id": "fibwatch",
+      "name": "FibWatch",
+      "description": "Watch Movies, Series, Anime in English & Hindi",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/fibwatch.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mkv",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/sfLR6dMm/fibwatch.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "goated",
+      "name": "🐐 Goated",
+      "description": "4K • 1080p Movies & Series in Multi Language",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/goated.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mkv",
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/qqsfgS0F/goated.png",
+      "contentLanguage": [
+        "en",
+        "hi",
+        "ru",
+        "es"
+      ]
+    },
+    {
+      "id": "gramcinema",
+      "name": "GramCinema",
+      "description": "Streams in Multi Lang from Bollywood.eu.org. Requires Cookie Token.",
+      "version": "1.0.0",
+      "author": "Xyr0nX • =[D3adly]=",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/gramcinema.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/WbNPW7Jv/gramcinema.png",
+      "contentLanguage": [
+        "en",
+        "hi",
+        "ta",
+        "ru"
+      ]
+    },
+    {
+      "id": "movieblast",
+      "name": "MovieBlast",
+      "description": "MovieBlast - Hindi, Tamil, Telugu & English Movies/Series with multi-quality streams",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/movieblast.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/qqkLSyhN/movieblast.png",
+      "contentLanguage": [
+        "en",
+        "hi",
+        "ta",
+        "te"
+      ]
+    },
+    {
+      "id": "movix",
+      "name": "Movix VF",
+      "description": "Movies and TV series in English & French (dubbed/subtitled)",
+      "version": "1.0.0",
       "author": "wooodyhood",
       "supportedTypes": [
         "movie",
-        "tv"
+        "tv",
+        "anime"
       ],
       "filename": "providers/movix.js",
       "enabled": true,
@@ -162,559 +750,179 @@
       "contentLanguage": [
         "en",
         "fr"
-      ],
-      "sourcePackage": "Morrow-2-D3adly"
+      ]
     },
     {
-      "id": "playimdb-1",
-      "name": "PlayIMDb 1",
-      "description": "High-Speed Direct Streaming for Movies (IMDb ID Extract) [Source: Morrow 2 - D3adly Providers]",
-      "version": "2.0.0",
-      "author": "PirateZoro9",
+      "id": "netmirror",
+      "name": "NetMirror",
+      "description": "Netflix | Prime | Disney",
+      "version": "1.0.0",
+      "author": "Dustincos",
       "supportedTypes": [
         "movie",
-        "tv"
+        "tv",
+        "anime"
       ],
-      "filename": "providers/playimdb-1.js",
+      "filename": "providers/netmirror.js",
       "enabled": true,
       "hasSettings": true,
       "formats": [
         "mp4",
-        "mkv",
-        "m3u8"
-      ],
-      "logo": "https://i.postimg.cc/KzjPtYWY/imdb.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ],
-      "sourcePackage": "Morrow-2-D3adly"
-    },
-    {
-      "id": "topcartoons",
-      "name": "TopCartoons",
-      "description": "Popular cartoons streaming [Source: Morrow 2 - D3adly Providers]",
-      "version": "1.0.0",
-      "author": "Phisher",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/topcartoons.js",
-      "enabled": false,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "m3u8"
-      ],
-      "logo": "https://i.postimg.cc/3xVsbwp8/topcartoons.png",
-      "contentLanguage": [
-        "en"
-      ],
-      "sourcePackage": "Morrow-2-D3adly"
-    },
-    {
-      "id": "kisskh",
-      "name": "Kisskh",
-      "description": "Asian Drama & Anime streaming [Source: Morrow 3 - Michat88 Providers]",
-      "version": "1.0.0",
-      "author": "Michat88",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/kisskh.js",
-      "enabled": true,
-      "formats": [
-        "mp4",
-        "m3u8"
-      ],
-      "logo": "https://kisskh.ovh/favicon.ico",
-      "contentLanguage": [
-        "en",
-        "id"
-      ],
-      "sourcePackage": "Morrow-3-Michat88"
-    },
-    {
-      "id": "castle-3",
-      "name": "Castle 3",
-      "description": "Auto-generated description for Castle [Source: Morrow 3 - Michat88 Providers]",
-      "version": "1.0.0",
-      "author": "Michat88",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/castle-3.js",
-      "enabled": true,
-      "formats": [
-        "mp4",
-        "m3u8"
-      ],
-      "logo": "https://via.placeholder.com/150",
-      "contentLanguage": [
-        "en"
-      ],
-      "sourcePackage": "Morrow-3-Michat88"
-    },
-    {
-      "id": "movix-2",
-      "name": "Movix VF 2",
-      "description": "English and French movie and TV streams [Source: Morrow 3 - Michat88 Providers]",
-      "version": "1.0.0",
-      "author": "wooodyhood",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/movix-2.js",
-      "enabled": false,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "m3u8"
-      ],
-      "logo": "https://i.postimg.cc/XYrPQm87/movix.png",
-      "contentLanguage": [
-        "en",
-        "fr"
-      ],
-      "sourcePackage": "Morrow-3-Michat88"
-    },
-    {
-      "id": "playimdb-2",
-      "name": "PlayIMDb 2",
-      "description": "High-speed direct movie and TV streams [Source: Morrow 3 - Michat88 Providers]",
-      "version": "2.0.0",
-      "author": "PirateZoro9",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/playimdb-2.js",
-      "enabled": false,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "mkv",
-        "m3u8"
-      ],
-      "logo": "https://i.postimg.cc/KzjPtYWY/imdb.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ],
-      "sourcePackage": "Morrow-3-Michat88"
-    },
-    {
-      "id": "4khdhub-2",
-      "name": "4KHDHub 2",
-      "description": "Verified direct movie and TV links [Source: Morrow 4 - Spidey Providers]",
-      "version": "1.0.2",
-      "author": "Nuvio Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/4khdhub-2.js",
-      "enabled": false,
-      "formats": [
+        "m3u8",
         "mkv"
       ],
-      "logo": "https://www.google.com/s2/favicons?domain=4khdhub.click&sz=128",
-      "contentLanguage": [
-        "en"
-      ],
-      "sourcePackage": "Morrow-4-Spidey"
-    },
-    {
-      "id": "uhdmovies-2",
-      "name": "UHDMovies 2",
-      "description": "Verified UHD movie and TV streams [Source: Morrow 4 - Spidey Providers]",
-      "version": "1.2.0",
-      "author": "Nuvio Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/uhdmovies-2.js",
-      "enabled": false,
-      "formats": [
-        "mkv"
-      ],
-      "logo": "https://www.google.com/s2/favicons?domain=uhdmovies.pink&sz=128",
-      "contentLanguage": [
-        "en"
-      ],
-      "sourcePackage": "Morrow-4-Spidey"
-    },
-    {
-      "id": "dvdplay-2",
-      "name": "DVDPlay 2",
-      "description": "Verified direct links with HubCloud extraction [Source: Morrow 4 - Spidey Providers]",
-      "version": "1.0.2",
-      "author": "Nuvio Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/dvdplay-2.js",
-      "enabled": false,
-      "formats": [
-        "mkv"
-      ],
-      "logo": "https://www.google.com/s2/favicons?domain=dvdplay.com&sz=128",
-      "contentLanguage": [
-        "mal",
-        "tam",
-        "hin"
-      ],
-      "sourcePackage": "Morrow-4-Spidey"
-    },
-    {
-      "id": "castle-4",
-      "name": "Castle 4",
-      "description": "Verified multi-language movie and TV streams [Source: Morrow 4 - Spidey Providers]",
-      "version": "1.0.0",
-      "author": "Nuvio Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/castle-4.js",
-      "enabled": false,
-      "formats": [
-        "mp4",
-        "m3u8"
-      ],
-      "logo": "https://static.hbayy.com/simple-blog-13/prod/_nuxt/big-logo.DESZ4mBj.png",
+      "logo": "https://i.postimg.cc/L64M3bYV/netmirror.png",
       "contentLanguage": [
         "en",
         "hi",
         "ta",
-        "te",
-        "ml",
-        "kn"
-      ],
-      "sourcePackage": "Morrow-4-Spidey"
+        "te"
+      ]
     },
     {
-      "id": "hdhub4u-2",
-      "name": "HDHub4u 2",
-      "description": "Verified direct links with high-speed download support [Source: Morrow 4 - Spidey Providers]",
-      "version": "1.2.0",
-      "author": "Nuvio Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/hdhub4u-2.js",
-      "enabled": false,
-      "formats": [
-        "mkv",
-        "mp4"
-      ],
-      "logo": "https://www.google.com/s2/favicons?domain=new6.hdhub4u.fo&sz=128",
-      "contentLanguage": [
-        "en",
-        "hin"
-      ],
-      "sourcePackage": "Morrow-4-Spidey"
-    },
-    {
-      "id": "movix-3",
-      "name": "Movix VF 3",
-      "description": "Verified English and French movie and TV streams [Source: Morrow 4 - Spidey Providers]",
-      "version": "1.0.0",
+      "id": "purstream",
+      "name": "Purstream",
+      "description": "Films and series in French (VF) / subtitled French (VOSTFR) / multi-language (MULTI) from purstream.art.",
+      "version": "3.0.0",
       "author": "wooodyhood",
       "supportedTypes": [
         "movie",
-        "tv"
+        "tv",
+        "anime"
       ],
-      "filename": "providers/movix-3.js",
-      "enabled": false,
+      "filename": "providers/purstream.js",
+      "enabled": true,
+      "hasSettings": true,
       "formats": [
         "mp4",
         "m3u8"
       ],
-      "logo": "https://i.postimg.cc/XYrPQm87/movix.png",
+      "logo": "https://i.postimg.cc/7L5shxmC/purstream.png",
       "contentLanguage": [
         "en",
         "fr"
-      ],
-      "sourcePackage": "Morrow-4-Spidey"
+      ]
     },
     {
-      "id": "playimdb-3",
-      "name": "PlayIMDb 3",
-      "description": "Verified high-speed direct movie and TV streams [Source: Morrow 4 - Spidey Providers]",
-      "version": "2.0.0",
-      "author": "PirateZoro9",
+      "id": "vidfast",
+      "name": "VidFast",
+      "description": "Stream movies and TV shows from vidfast.pro.",
+      "version": "1.0.0",
+      "author": "Dustincos",
       "supportedTypes": [
         "movie",
-        "tv"
+        "tv",
+        "anime"
       ],
-      "filename": "providers/playimdb-3.js",
-      "enabled": false,
+      "filename": "providers/vidfast.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/0Qp8PSx5/vidfast.png",
+      "contentLanguage": [
+        "en"
+      ]
+    },
+    {
+      "id": "vidlove",
+      "name": "❤️ VidLove",
+      "description": "Movie and TV show streams from MovieBox, LookMovie, VidnNest etc",
+      "version": "1.0.0",
+      "author": "Jeff",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/vidlove.js",
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "mp4",
+        "m3u8",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/ZRjQytBY/vidlove.png",
+      "contentLanguage": [
+        "en"
+      ]
+    },
+    {
+      "id": "vidrock",
+      "name": "🪨 VidRock",
+      "description": "VidRock - 1080p 480p and 360p",
+      "version": "1.0.0",
+      "author": "Nuvio Team",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/vidrock.js",
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "logo": "https://i.postimg.cc/brxL7qg3/multivid.png",
+      "contentLanguage": [
+        "en"
+      ]
+    },
+    {
+      "id": "zinkmovies",
+      "name": "ZinkMovies",
+      "description": "Bollywood Movies, Hollywood Movies, South Indian Movies, Hindi Dubbed Movies, Web Series, OTT Releases, & Trending Cinema",
+      "version": "1.0.0",
+      "author": "Kabir",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "filename": "providers/zinkmovies.js",
+      "enabled": true,
+      "hasSettings": true,
       "formats": [
         "mp4",
         "mkv",
         "m3u8"
       ],
-      "logo": "https://i.postimg.cc/KzjPtYWY/imdb.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ],
-      "sourcePackage": "Morrow-4-Spidey"
-    },
-    {
-      "id": "moonvidmodyfilmdizi",
-      "name": "MoonVidmodyFilmDizi",
-      "description": "En yeni filmlleri güvenli ve hızlı şekilde sunar. [Source: Morrow 5 - Mooncrown Providers]",
-      "version": "1.0.0",
-      "author": "MoOnCrOwN",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-        "filename": "providers/moonvidmodyfilmdizi.js",
-        "enabled": false,
-      "formats": [
-        "mp4",
-        "mkv",
-        "hls",
-        "m3u8"
-      ],
-      "logo": "",
-      "contentLanguage": [
-        "tr",
-        "en"
-      ],
-      "sourcePackage": "Morrow-5-Mooncrown"
-    },
-    {
-      "id": "4khdhub-3",
-      "name": "4KHDHub 3",
-      "description": "Verified direct movie and TV links [Source: Morrow 5 - Mooncrown Providers]",
-      "version": "1.0.2",
-      "author": "Nuvio Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/4khdhub-3.js",
-      "enabled": false,
-      "formats": [
-        "mkv"
-      ],
-      "logo": "https://www.google.com/s2/favicons?domain=4khdhub.click&sz=128",
-      "contentLanguage": [
-        "en"
-      ],
-      "sourcePackage": "Morrow-5-Mooncrown"
-    },
-    {
-      "id": "uhdmovies-3",
-      "name": "UHDMovies 3",
-      "description": "Verified UHD movie and TV streams [Source: Morrow 5 - Mooncrown Providers]",
-      "version": "1.2.0",
-      "author": "Nuvio Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/uhdmovies-3.js",
-      "enabled": false,
-      "formats": [
-        "mkv"
-      ],
-      "logo": "https://www.google.com/s2/favicons?domain=uhdmovies.pink&sz=128",
-      "contentLanguage": [
-        "en"
-      ],
-      "sourcePackage": "Morrow-5-Mooncrown"
-    },
-    {
-      "id": "dvdplay-3",
-      "name": "DVDPlay 3",
-      "description": "Verified direct links with HubCloud extraction [Source: Morrow 5 - Mooncrown Providers]",
-      "version": "1.0.2",
-      "author": "Nuvio Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/dvdplay-3.js",
-      "enabled": false,
-      "formats": [
-        "mkv"
-      ],
-      "logo": "https://www.google.com/s2/favicons?domain=dvdplay.com&sz=128",
-      "contentLanguage": [
-        "mal",
-        "tam",
-        "hin"
-      ],
-      "sourcePackage": "Morrow-5-Mooncrown"
-    },
-    {
-      "id": "castle-5",
-      "name": "Castle 5",
-      "description": "Verified multi-language movie and TV streams [Source: Morrow 5 - Mooncrown Providers]",
-      "version": "1.0.0",
-      "author": "Nuvio Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/castle-5.js",
-      "enabled": false,
-      "formats": [
-        "mp4",
-        "m3u8"
-      ],
-      "logo": "https://static.hbayy.com/simple-blog-13/prod/_nuxt/big-logo.DESZ4mBj.png",
+      "logo": "https://i.postimg.cc/XqCZyCgp/zinkmovies.png",
       "contentLanguage": [
         "en",
         "hi",
         "ta",
-        "te",
-        "ml",
-        "kn"
-      ],
-      "sourcePackage": "Morrow-5-Mooncrown"
+        "te"
+      ]
     },
     {
-      "id": "hdhub4u-3",
-      "name": "HDHub4u 3",
-      "description": "Verified direct links with high-speed download support [Source: Morrow 5 - Mooncrown Providers]",
-      "version": "1.2.0",
-      "author": "Nuvio Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/hdhub4u-3.js",
-      "enabled": false,
-      "formats": [
-        "mkv",
-        "mp4"
-      ],
-      "logo": "https://www.google.com/s2/favicons?domain=new6.hdhub4u.fo&sz=128",
-      "contentLanguage": [
-        "en",
-        "hin"
-      ],
-      "sourcePackage": "Morrow-5-Mooncrown"
-    },
-    {
-      "id": "movix-4",
-      "name": "Movix VF 4",
-      "description": "Verified English and French movie and TV streams [Source: Morrow 5 - Mooncrown Providers]",
+      "id": "onlykdrama",
+      "name": "🫰 OnlyKDrama",
+      "description": "Asian Drama",
       "version": "1.0.0",
-      "author": "wooodyhood",
+      "author": "Moiz Ahmed + Codex",
       "supportedTypes": [
         "movie",
-        "tv"
+        "tv",
+        "anime"
       ],
-      "filename": "providers/movix-4.js",
-      "enabled": false,
+      "filename": "providers/onlykdrama.js",
+      "enabled": true,
+      "hasSettings": true,
       "formats": [
         "mp4",
+        "mkv",
         "m3u8"
       ],
-      "logo": "https://i.postimg.cc/XYrPQm87/movix.png",
+      "logo": "https://i.postimg.cc/dtX84Gqc/onlykdrama.jpg",
       "contentLanguage": [
-        "en",
-        "fr"
-      ],
-      "sourcePackage": "Morrow-5-Mooncrown"
-    },
-    {
-      "id": "playimdb-4",
-      "name": "PlayIMDb 4",
-      "description": "Verified high-speed direct movie and TV streams [Source: Morrow 5 - Mooncrown Providers]",
-      "version": "2.0.0",
-      "author": "PirateZoro9",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/playimdb-4.js",
-      "enabled": false,
-      "formats": [
-        "mp4",
-        "mkv",
-        "m3u8"
-      ],
-      "logo": "https://i.postimg.cc/KzjPtYWY/imdb.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ],
-      "sourcePackage": "Morrow-5-Mooncrown"
-    },
-    {
-      "id": "netnaija",
-      "name": "NetNaija",
-      "description": "Requested-site adapter for NetNaija [Source: Morrow 6 - Requested Movie and TV Providers]",
-      "version": "1.0.0",
-      "author": "Morrow",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-        "filename": "providers/netnaija.js",
-        "enabled": false,
-      "formats": [
-        "mp4",
-        "mkv",
-        "m3u8"
-      ],
-      "sourceSite": "https://netnaija.film/",
-      "sourcePackage": "Morrow-6-Requested"
-    },
-    {
-      "id": "hdhub4u-4",
-      "name": "HDHub4u 4",
-      "description": "HDHub4u provider from the upstream Nuvio implementation [Source: Morrow 6 - Requested Movie and TV Providers]",
-      "version": "1.1.0",
-      "author": "Morrow",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/hdhub4u-4.js",
-      "enabled": false,
-      "formats": [
-        "mp4",
-        "mkv",
-        "m3u8"
-      ],
-      "sourceSite": "https://new6.hdhub4u.cl/",
-      "sourcePackage": "Morrow-6-Requested"
-    },
-    {
-      "id": "world4ufree",
-      "name": "World4uFree",
-      "description": "Requested-site adapter for World4uFree [Source: Morrow 6 - Requested Movie and TV Providers]",
-      "version": "1.0.0",
-      "author": "Morrow",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/world4ufree.js",
-      "enabled": false,
-      "formats": [
-        "mp4",
-        "mkv",
-        "m3u8"
-      ],
-      "sourceSite": "https://world4ufree.beer/",
-      "sourcePackage": "Morrow-6-Requested"
+        "ko"
+      ]
     }
   ]
 }
