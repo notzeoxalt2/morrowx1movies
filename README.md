@@ -56,3 +56,7 @@ A catalog entry is not a guarantee of playback. Each adapter must resolve the se
 ## Development
 
 Providers export `getStreams(id, mediaType, season, episode)`. Return direct media URLs, actual quality and audio metadata, subtitle tracks, and required request headers. Do not relabel another provider’s results as site-specific sources.
+
+## Runtime update
+
+RiveStream and CinemaBZ implementations use their actual public site APIs. They remain disabled until Morrow native playback verification passes. Correct JavaScript timer support is included in Desktop 0.1.33 and Android 0.4.31. See PROVIDER_STATUS.md for evidence and remaining work.
