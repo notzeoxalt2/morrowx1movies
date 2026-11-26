@@ -60,3 +60,8 @@ Providers export `getStreams(id, mediaType, season, episode)`. Return direct med
 ## Runtime update
 
 RiveStream and CinemaBZ implementations use their actual public site APIs. They remain disabled until Morrow native playback verification passes. Correct JavaScript timer support is included in Desktop 0.1.33 and Android 0.4.31. See PROVIDER_STATUS.md for evidence and remaining work.
+
+
+## Third-party attribution
+
+`providers/streamflix.js` is adapted from `michat88/nuvio-providers` under GPL-3.0. Its upstream license text is included in `LICENSES/GPL-3.0.txt`. Morrow injects the TMDB API key at runtime; no upstream key is embedded in this adapter.

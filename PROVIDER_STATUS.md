@@ -44,3 +44,5 @@ Updated 2026-10-09. Stream discovery, valid manifests, decoded playback, and all
 | OnlyKDrama | Existing adapter; complete correct-content/native playback coverage not yet certified. |
 | RiveStream | Disabled pending stable playback. Oct 9 selected Reacher S2E1 and Fight Club sources decoded at 720p, but Reacher S1E1 returned zero validated sources. |
 | CinemaBZ | Enabled genuine public-server adapter. Oct 9 Reacher S1E1/S2E1 and Fight Club selected CookieBakers source decoded through Morrow (1080p/1920x960). Every server/title not certified. |
+
+| StreamFlix | Added 2026-11-27 after Morrow QuickJS returned 3 Fight Club (TMDB 550) sources in 842 ms. Native decode and TV episode verification remain pending. Adapted from michat88/nuvio-providers under GPL-3.0; TMDB key read from Morrow runtime. |

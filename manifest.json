@@ -1,6 +1,6 @@
 {
   "name": "Morrow Movies & TV",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Morrow movie and TV adapters. Exact title/season/episode and native playback findings are listed in PROVIDER_STATUS.md.",
   "scrapers": [
     {
@@ -934,6 +934,26 @@
       "version": "1.0.0",
       "description": "Actual CinemaBZ public servers; exact TMDB movie/season/episode queries. Selected Reacher S1E1/S2E1 and Fight Club decoded through Morrow.",
       "logo": "https://cinema.army/favicon.ico"
+    },
+    {
+      "id": "streamflix",
+      "name": "StreamFlix",
+      "description": "Movie and TV sources from StreamFlix. Morrow runtime adapted; selected Fight Club source discovery passed.",
+      "version": "1.0.0",
+      "author": "Michat88 / Morrow adaptation",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/streamflix.js",
+      "enabled": true,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "contentLanguage": [
+        "en"
+      ]
     }
   ]
 }
