@@ -64,6 +64,10 @@ var __async = (__this, __arguments, generator) => {
 
 // src/moviebox/constants.js
 var API_BASE = "https://api3.aoneroom.com";
+var API_HOSTS = [
+  "https://api3.aoneroom.com",
+  "https://api6.aoneroom.com"
+];
 var KEY_B64_DEFAULT = "NzZpUmwwN3MweFNOOWpxbUVXQXQ3OUVCSlp1bElRSXNWNjRGWnIyTw==";
 var KEY_B64_ALT = "WHFuMm5uTzQxL0w5Mm8xaXVYaFNMSFRiWHZZNFo1Wlo2Mm04bVNMQQ==";
 var TMDB_API_KEY = "1865f43a0549ca50d341dd9ab8b29f49";
@@ -465,6 +469,56 @@ function findBestMatch(subjects, tmdbTitle, tmdbYear, mediaType) {
     return bestMatch;
   return null;
 }
+function isMovieBoxPlaceholderUrl(value) {
+  const lower = String(value || "").toLowerCase();
+  return lower.includes("1c7de0bd3393702d9191801f15f88f8d") ||
+    lower.includes("9a0461bc39da389663bf3dbb17091d3f") ||
+    lower.includes("b164fbfb4347792950bdfbfb563d39d9") ||
+    lower.includes("/notice.mp4") ||
+    (lower.includes("macdn.aoneroom.com") && lower.includes("/other/"));
+}
+function isUnsupportedMovieBoxHost(value) {
+  try {
+    const host = new URL(String(value || "")).hostname.toLowerCase();
+    return host === "youtu.be" || host.endsWith(".youtube.com") || host === "youtube.com" ||
+      host === "dai.ly" || host.endsWith(".dailymotion.com") || host === "dailymotion.com";
+  } catch (e) {
+    return true;
+  }
+}
+function movieBoxResourceListUrl(subjectId, season, episode) {
+  const base = `${API_BASE}/wefeed-mobile-bff/subject-api/resource/v2?subjectId=${encodeURIComponent(subjectId)}&page=1&perPage=20&all=0&startPosition=1&endPosition=1&pagerMode=2&resolution=0`;
+  return season > 0 && episode > 0 ? `${base}&se=${season}&epFrom=${episode}&epTo=${episode}&isVip=true` : `${base}&isVip=true`;
+}
+function movieBoxResourcePositionUrl(subjectId, resourceId, failedUrl) {
+  const query = new URLSearchParams({ subjectId: String(subjectId), resourceId: String(resourceId), failUrl: String(failedUrl), failCode: "404", resourceNum: "0", isVip: "true" });
+  return `${API_BASE}/wefeed-mobile-bff/subject-api/resource-position/v2?${query.toString()}`;
+}
+function movieBoxResourceItems(response) {
+  const payload = response && response.data;
+  const data = payload && payload.data;
+  const list = (data && data.list) || (payload && payload.list) || [];
+  return Array.isArray(list) ? list : [];
+}
+function recoverMovieBoxResource(subjectId, resourceId, failedUrl, season, episode) {
+  return __async(this, null, function* () {
+    const path = movieBoxResourcePositionUrl(subjectId, resourceId, failedUrl).replace(API_BASE, "");
+    for (const host of API_HOSTS) {
+      const response = yield movieBoxRequest("GET", `${host}${path}`, null);
+      const recovered = movieBoxResourceItems(response).find((candidate) => {
+        const candidateId = candidate.resourceId != null ? String(candidate.resourceId) : String(candidate.id || "");
+        const candidateSeason = Number(candidate.se != null ? candidate.se : 0);
+        const candidateEpisode = Number(candidate.ep != null ? candidate.ep : 0);
+        const candidateUrl = candidate.resourceLink || candidate.url || "";
+        return candidateId === String(resourceId) && candidateSeason === season && candidateEpisode === episode &&
+          !!candidateUrl && !isMovieBoxPlaceholderUrl(candidateUrl) && !isUnsupportedMovieBoxHost(candidateUrl);
+      });
+      if (recovered)
+        return recovered;
+    }
+    return null;
+  });
+}
 function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", mediaType = "movie") {
   return __async(this, null, function* () {
     const subjectUrl = `${API_BASE}/wefeed-mobile-bff/subject-api/get?subjectId=${subjectId}`;
@@ -485,12 +539,19 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
       });
     }
     subjectIds.unshift({ id: subjectId, lang: originalLang });
+    subjectIds.sort((a, b) => {
+      const priority = (language) => /hindi|\bhi\b/i.test(String(language || "")) ? 0 :
+        /original|japanese|\bja\b/i.test(String(language || "")) ? 1 : 2;
+      return priority(a.lang) - priority(b.lang);
+    });
     const allStreams = [];
     const userAgent = `${PACKAGE_INFO.package_name}/${PACKAGE_INFO.version_code} (Linux; U; Android 14; en_IN; Pixel 8; Build/UD1A.230803.041; Cronet/145.0.7582.0)`;
+    let recoveryAttempts = 0;
     for (const item of subjectIds) {
       try {
-        const playUrl = `${API_BASE}/wefeed-mobile-bff/subject-api/play-info?subjectId=${item.id}&se=${season}&ep=${episode}`;
-        const playRes = yield movieBoxRequest("GET", playUrl, null);
+        const playUrlV2 = `${API_BASE}/wefeed-mobile-bff/subject-api/play-info/v2?subjectId=${encodeURIComponent(item.id)}&se=${season}&ep=${episode}`;
+        const playV2Res = yield movieBoxRequest("GET", playUrlV2, null);
+        const playRes = playV2Res && playV2Res.data && playV2Res.data.data ? playV2Res : yield movieBoxRequest("GET", `${API_BASE}/wefeed-mobile-bff/subject-api/play-info?subjectId=${encodeURIComponent(item.id)}&se=${season}&ep=${episode}`, null);
         let hasValidStream = false;
         if (playRes && playRes.data && playRes.data.data) {
           const playData = playRes.data.data;
@@ -501,11 +562,7 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
               const signCookie = stream.signCookie || null;
               const policyUrl = extractPolicyResource(signCookie);
               const finalStreamUrl = policyUrl || rawStreamUrl;
-              if (!finalStreamUrl)
-                continue;
-              if (finalStreamUrl.includes("b164fbfb4347792950bdfbfb563d39d9"))
-                continue;
-              if (finalStreamUrl === rawStreamUrl && rawStreamUrl.includes("/other/2026/09/"))
+              if (!finalStreamUrl || isMovieBoxPlaceholderUrl(finalStreamUrl) || isUnsupportedMovieBoxHost(finalStreamUrl))
                 continue;
               let formatType = getFormatType(finalStreamUrl);
               if (stream.format && stream.format.toUpperCase() === "HLS")
@@ -531,6 +588,7 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
             }
           }
           if (!hasValidStream) {
+            const resourceRes = yield movieBoxRequest("GET", movieBoxResourceListUrl(item.id, season, episode), null);
             let detectors = playData.resourceDetectors;
             if (!Array.isArray(detectors)) {
               detectors = subjectData.resourceDetectors;
@@ -541,16 +599,27 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
                   for (const video of detector.resolutionList) {
                     if (!video.resourceLink)
                       continue;
-                    const se = video.se != null ? video.se : 0;
-                    const ep = video.ep != null ? video.ep : 0;
+                    const se = Number(video.se != null ? video.se : 0);
+                    const ep = Number(video.ep != null ? video.ep : 0);
                     if ((season > 0 || episode > 0) && (se !== season || ep !== episode)) {
                       continue;
                     }
+                    let resourceUrl = video.resourceLink;
+                    if (isMovieBoxPlaceholderUrl(resourceUrl)) {
+                      const resourceId = video.resourceId || video.id;
+                      if (resourceId == null || recoveryAttempts >= 2)
+                        continue;
+                      recoveryAttempts++;
+                      const recovered = yield recoverMovieBoxResource(item.id, resourceId, resourceUrl, season, episode);
+                      resourceUrl = recovered && (recovered.resourceLink || recovered.url);
+                    }
+                    if (!resourceUrl || isMovieBoxPlaceholderUrl(resourceUrl) || isUnsupportedMovieBoxHost(resourceUrl))
+                      continue;
                     const quality = video.resolution ? `${video.resolution}p` : "Auto";
                     allStreams.push({
                       name: "MovieBox",
                       title: `${mediaTitle}${season > 0 ? ` S${season}E${episode}` : ""} (${item.lang}) - ${quality} [Fallback]`,
-                      url: video.resourceLink,
+                      url: resourceUrl,
                       quality,
                       headers: {
                         "Referer": `${API_BASE}/`,
@@ -558,9 +627,43 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
                       },
                       provider: "moviebox"
                     });
+                    hasValidStream = true;
                   }
                 }
               }
+            }
+            for (const resource of movieBoxResourceItems(resourceRes)) {
+              const resourceSeason = Number(resource.se != null ? resource.se : 0);
+              const resourceEpisode = Number(resource.ep != null ? resource.ep : 0);
+              if ((season > 0 || episode > 0) && (resourceSeason !== season || resourceEpisode !== episode))
+                continue;
+              let resourceUrl = resource.resourceLink || resource.url || "";
+              if (isMovieBoxPlaceholderUrl(resourceUrl)) {
+                const resourceId = resource.resourceId != null ? resource.resourceId : resource.id;
+                if (resourceId == null || recoveryAttempts >= 2)
+                  continue;
+                recoveryAttempts++;
+                const recovered = yield recoverMovieBoxResource(item.id, resourceId, resourceUrl, season, episode);
+                resourceUrl = recovered && (recovered.resourceLink || recovered.url);
+              }
+              if (!resourceUrl || isMovieBoxPlaceholderUrl(resourceUrl) || isUnsupportedMovieBoxHost(resourceUrl))
+                continue;
+              const resourceId = resource.resourceId || resource.id || `${item.id}|${season}|${episode}`;
+              const qualityNumber = parseQualityNumber(resource.resolution || resource.quality);
+              const quality = qualityNumber ? `${qualityNumber}p` : "Auto";
+              if (allStreams.some((stream) => stream.url === resourceUrl))
+                continue;
+              const subtitles = yield fetchSubtitles(item.id, resourceId, item.lang);
+              allStreams.push({
+                name: "MovieBox",
+                title: `${mediaTitle}${season > 0 ? ` S${season}E${episode}` : ""} (${item.lang}) - ${quality} [${getFormatType(resourceUrl)}]`,
+                url: resourceUrl,
+                quality,
+                headers: { "Referer": `${API_BASE}/`, "User-Agent": userAgent },
+                subtitles,
+                provider: "moviebox"
+              });
+              hasValidStream = true;
             }
           }
         }
@@ -585,7 +688,15 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
       const qb = qualityRank[(_b = b.quality) == null ? void 0 : _b.toLowerCase()] || 0;
       return qb - qa;
     });
-    return allStreams;
+    const uniqueStreams = [];
+    const seenStreamUrls = new Set();
+    for (const stream of allStreams) {
+      if (!stream.url || isMovieBoxPlaceholderUrl(stream.url) || isUnsupportedMovieBoxHost(stream.url) || seenStreamUrls.has(stream.url))
+        continue;
+      seenStreamUrls.add(stream.url);
+      uniqueStreams.push(stream);
+    }
+    return uniqueStreams;
   });
 }
 function fetchSubtitles(subjectId, streamId, langLabel) {

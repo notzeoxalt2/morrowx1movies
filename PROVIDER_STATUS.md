@@ -1,13 +1,13 @@
 # Provider verification status
 
-Updated 2026-10-09. Stream discovery, valid manifests, decoded playback, and all-server coverage are different checks. These records describe the evidence actually obtained.
+Updated 2026-11-27. Stream discovery, valid manifests, decoded playback, and all-server coverage are different checks. These records describe the evidence actually obtained.
 
 | Provider | Evidence / remaining work |
 |---|---|
 | 4KHDHub | Existing adapter; complete correct-content/native playback coverage not yet certified. |
 | UHDMovies | Existing adapter; complete correct-content/native playback coverage not yet certified. |
 | VegaMovies | Existing adapter; complete correct-content/native playback coverage not yet certified. |
-| MovieBox | Existing adapter; complete correct-content/native playback coverage not yet certified. |
+| MovieBox | TUI-style v2 resource recovery retries the recovery endpoint across the primary and one fallback API host, with at most two recovery attempts per title and Hindi prioritized. Known upgrade-notice URLs plus YouTube/Dailymotion URLs are filtered. Mandalorian S1E1 previously returned a playable-codec upgrade notice; the current Morrow-runtime recheck returns 0 sources instead of that false stream, taking 29.8 seconds. Recovery did not find a genuine replacement on this sample, so TV/episode playback and latency remain unresolved. A prior Fight Club movie sample returned 6 URLs and the first 3 reported H.264/AAC via ffprobe; frame/content verification was not done. |
 | VidSrc | Existing adapter; complete correct-content/native playback coverage not yet certified. |
 | VidLink | Existing adapter; complete correct-content/native playback coverage not yet certified. |
 | VidEasy | Existing adapter; complete correct-content/native playback coverage not yet certified. |
