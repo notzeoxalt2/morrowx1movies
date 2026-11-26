@@ -1,6 +1,6 @@
 {
   "name": "Morrow Movies & TV",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "description": "Morrow movie and TV adapters. Exact title/season/episode and native playback findings are listed in PROVIDER_STATUS.md.",
   "scrapers": [
     {

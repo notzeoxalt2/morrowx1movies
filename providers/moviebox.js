@@ -546,12 +546,13 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
     });
     const allStreams = [];
     const userAgent = `${PACKAGE_INFO.package_name}/${PACKAGE_INFO.version_code} (Linux; U; Android 14; en_IN; Pixel 8; Build/UD1A.230803.041; Cronet/145.0.7582.0)`;
-    let recoveryAttempts = 0;
-    for (const item of subjectIds) {
+    const subjectStreams = yield Promise.all(subjectIds.map(async (item, subjectIndex) => {
+      const itemStreams = [];
+      let recoveryAttempts = 0;
       try {
         const playUrlV2 = `${API_BASE}/wefeed-mobile-bff/subject-api/play-info/v2?subjectId=${encodeURIComponent(item.id)}&se=${season}&ep=${episode}`;
-        const playV2Res = yield movieBoxRequest("GET", playUrlV2, null);
-        const playRes = playV2Res && playV2Res.data && playV2Res.data.data ? playV2Res : yield movieBoxRequest("GET", `${API_BASE}/wefeed-mobile-bff/subject-api/play-info?subjectId=${encodeURIComponent(item.id)}&se=${season}&ep=${episode}`, null);
+        const playV2Res = await movieBoxRequest("GET", playUrlV2, null);
+        const playRes = playV2Res && playV2Res.data && playV2Res.data.data ? playV2Res : await movieBoxRequest("GET", `${API_BASE}/wefeed-mobile-bff/subject-api/play-info?subjectId=${encodeURIComponent(item.id)}&se=${season}&ep=${episode}`, null);
         let hasValidStream = false;
         if (playRes && playRes.data && playRes.data.data) {
           const playData = playRes.data.data;
@@ -571,8 +572,8 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
               const qualNum = parseQualityNumber(qualLabel);
               const quality = qualNum ? `${qualNum}p` : "Auto";
               const streamId = stream.id || `${item.id}|${season}|${episode}`;
-              const subtitles = yield fetchSubtitles(item.id, streamId, item.lang);
-              allStreams.push({
+              const subtitles = await fetchSubtitles(item.id, streamId, item.lang);
+              itemStreams.push({
                 name: "MovieBox",
                 title: `${mediaTitle}${season > 0 ? ` S${season}E${episode}` : ""} (${item.lang}) - ${quality} [${formatType}]`,
                 url: finalStreamUrl,
@@ -588,7 +589,7 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
             }
           }
           if (!hasValidStream) {
-            const resourceRes = yield movieBoxRequest("GET", movieBoxResourceListUrl(item.id, season, episode), null);
+            const resourceRes = await movieBoxRequest("GET", movieBoxResourceListUrl(item.id, season, episode), null);
             let detectors = playData.resourceDetectors;
             if (!Array.isArray(detectors)) {
               detectors = subjectData.resourceDetectors;
@@ -607,16 +608,16 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
                     let resourceUrl = video.resourceLink;
                     if (isMovieBoxPlaceholderUrl(resourceUrl)) {
                       const resourceId = video.resourceId || video.id;
-                      if (resourceId == null || recoveryAttempts >= 2)
+                      if (resourceId == null || subjectIndex >= 2 || recoveryAttempts >= 2)
                         continue;
                       recoveryAttempts++;
-                      const recovered = yield recoverMovieBoxResource(item.id, resourceId, resourceUrl, season, episode);
+                      const recovered = await recoverMovieBoxResource(item.id, resourceId, resourceUrl, season, episode);
                       resourceUrl = recovered && (recovered.resourceLink || recovered.url);
                     }
                     if (!resourceUrl || isMovieBoxPlaceholderUrl(resourceUrl) || isUnsupportedMovieBoxHost(resourceUrl))
                       continue;
                     const quality = video.resolution ? `${video.resolution}p` : "Auto";
-                    allStreams.push({
+                    itemStreams.push({
                       name: "MovieBox",
                       title: `${mediaTitle}${season > 0 ? ` S${season}E${episode}` : ""} (${item.lang}) - ${quality} [Fallback]`,
                       url: resourceUrl,
@@ -640,10 +641,10 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
               let resourceUrl = resource.resourceLink || resource.url || "";
               if (isMovieBoxPlaceholderUrl(resourceUrl)) {
                 const resourceId = resource.resourceId != null ? resource.resourceId : resource.id;
-                if (resourceId == null || recoveryAttempts >= 2)
+                if (resourceId == null || subjectIndex >= 2 || recoveryAttempts >= 2)
                   continue;
                 recoveryAttempts++;
-                const recovered = yield recoverMovieBoxResource(item.id, resourceId, resourceUrl, season, episode);
+                const recovered = await recoverMovieBoxResource(item.id, resourceId, resourceUrl, season, episode);
                 resourceUrl = recovered && (recovered.resourceLink || recovered.url);
               }
               if (!resourceUrl || isMovieBoxPlaceholderUrl(resourceUrl) || isUnsupportedMovieBoxHost(resourceUrl))
@@ -651,10 +652,10 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
               const resourceId = resource.resourceId || resource.id || `${item.id}|${season}|${episode}`;
               const qualityNumber = parseQualityNumber(resource.resolution || resource.quality);
               const quality = qualityNumber ? `${qualityNumber}p` : "Auto";
-              if (allStreams.some((stream) => stream.url === resourceUrl))
+              if (itemStreams.some((stream) => stream.url === resourceUrl))
                 continue;
-              const subtitles = yield fetchSubtitles(item.id, resourceId, item.lang);
-              allStreams.push({
+              const subtitles = await fetchSubtitles(item.id, resourceId, item.lang);
+              itemStreams.push({
                 name: "MovieBox",
                 title: `${mediaTitle}${season > 0 ? ` S${season}E${episode}` : ""} (${item.lang}) - ${quality} [${getFormatType(resourceUrl)}]`,
                 url: resourceUrl,
@@ -670,7 +671,9 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
       } catch (err) {
         console.error(`[MovieBox Stream Fetch Error] ID: ${item.id}`, err.message);
       }
-    }
+      return itemStreams;
+    }));
+    subjectStreams.forEach((streams) => allStreams.push(...streams));
     const qualityRank = {
       "2160p": 2160,
       "4k": 2160,
