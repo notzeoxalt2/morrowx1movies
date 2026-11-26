@@ -938,7 +938,7 @@
     {
       "id": "streamflix",
       "name": "StreamFlix",
-      "description": "Movie and TV sources from StreamFlix. Morrow runtime adapted; selected Fight Club source discovery passed.",
+      "description": "Candidate adapter disabled: source discovery returned links, but media probes returned 404 and DNS failures.",
       "version": "1.0.0",
       "author": "Michat88 / Morrow adaptation",
       "supportedTypes": [
@@ -946,7 +946,7 @@
         "tv"
       ],
       "filename": "providers/streamflix.js",
-      "enabled": true,
+      "enabled": false,
       "formats": [
         "mp4",
         "m3u8"
