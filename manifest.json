@@ -1,13 +1,13 @@
 {
   "name": "Morrow Movies & TV",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "description": "Morrow movie and TV adapters. Exact title/season/episode and native playback findings are listed in PROVIDER_STATUS.md.",
   "scrapers": [
     {
       "id": "4khdhub",
       "name": "4KHDHub",
       "description": "4KHDHub direct links",
-      "version": "1.6.1",
+      "version": "1.6.3",
       "author": "Nuvio Team",
       "supportedTypes": [
         "movie",
@@ -17,6 +17,7 @@
       "enabled": true,
       "hasSettings": true,
       "formats": [
+        "mkv",
         "mp4",
         "m3u8"
       ],
@@ -29,7 +30,7 @@
       "id": "uhdmovies",
       "name": "UHDMovies",
       "description": "UHD Movies streaming with multiple resolution",
-      "version": "1.6.1",
+      "version": "1.6.2",
       "author": "Nuvio Team",
       "supportedTypes": [
         "movie",
@@ -74,7 +75,7 @@
       "id": "moviebox",
       "name": "MovieBox",
       "description": "MovieBox streaming with multiple language support (DASH + MP4)",
-      "version": "1.6.2",
+      "version": "1.6.3",
       "author": "Nuvio Team",
       "supportedTypes": [
         "movie",
@@ -887,6 +888,29 @@
       "logo": "https://i.postimg.cc/dtX84Gqc/onlykdrama.jpg",
       "contentLanguage": [
         "ko"
+      ]
+    },
+    {
+      "id": "dramachi",
+      "name": "DramaChi",
+      "description": "Asian drama episodes with exact season/episode matching and available language rips.",
+      "version": "1.0.0",
+      "author": "Morrow adaptation of MovieBox-TUI API flow",
+      "supportedTypes": [
+        "tv"
+      ],
+      "filename": "providers/dramachi.js",
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "contentLanguage": [
+        "hi",
+        "en",
+        "ko",
+        "und"
       ]
     },
     {

@@ -64,6 +64,7 @@ var __async = (__this, __arguments, generator) => {
 
 // src/moviebox/constants.js
 var API_BASE = "https://api3.aoneroom.com";
+var MOVIEBOX_STREAM_REFERER = "https://sportslive.wine";
 var API_HOSTS = [
   "https://api6.aoneroom.com",
   "https://api5.aoneroom.com",
@@ -129,7 +130,19 @@ function getCachedToken() {
   return __async(this, null, function* () {
     if (isTokenValid(bearerToken))
       return bearerToken;
-    console.log("[MovieBox] Fetching fresh anonymous token...");
+    console.log("[MovieBox] Fetching a fresh visitor session...");
+    // Match the current MovieBox-TUI client: visitor-login is the primary
+    // session bootstrap. The old ranking-list x-user fallback can return a
+    // token that still searches but only yields upgrade/notice resources.
+    const login = yield movieBoxRequest("POST", "https://api3.aoneroom.com/wefeed-mobile-bff/user-api/visitor-login", "{}", {}, true);
+    const loginPayload = login && login.data;
+    const loginData = loginPayload && (loginPayload.data || loginPayload);
+    const loginToken = loginData && (loginData.token || loginData.accessToken);
+    if (loginToken && isTokenValid(loginToken)) {
+      bearerToken = loginToken;
+      return bearerToken;
+    }
+    console.log("[MovieBox] Visitor-login returned no usable token; trying legacy anonymous bootstrap...");
     const url = TOKEN_URL;
     const res = yield movieBoxRequest("GET", url, null, {}, true);
     if (res && res.headers) {
@@ -229,7 +242,7 @@ function generateXTrSignature(method, accept, contentType, url, body, useAltKey 
   return `${timestamp}|2|${signatureB64}`;
 }
 function movieBoxRequest(_0, _1) {
-  return __async(this, arguments, function* (method, url, body = null, customHeaders = {}, isTokenFetch = false) {
+  return __async(this, arguments, function* (method, url, body = null, customHeaders = {}, isTokenFetch = false, sessionRetry = false) {
     initializeSession();
     let requestUrls = [url];
     try {
@@ -283,11 +296,16 @@ function movieBoxRequest(_0, _1) {
       try {
         const res = yield fetch(requestUrl, options);
         if (!res.ok) {
+          // The current MovieBox client refreshes its visitor session after
+          // either authorization status, then retries the original request
+          // once. Do not loop on the refreshed request.
+          if ((res.status === 401 || res.status === 403) && !isTokenFetch && !sessionRetry) {
+            bearerToken = "";
+            const freshToken = yield getCachedToken();
+            if (freshToken)
+              return yield movieBoxRequest(method, url, body, customHeaders, isTokenFetch, true);
+          }
           if ([401, 403, 406, 407, 429, 500, 502, 503, 504].includes(res.status) && hostIndex + 1 < requestUrls.length) {
-            if (res.status === 401) {
-              bearerToken = "";
-              cachedToken = isTokenFetch ? "" : yield getCachedToken();
-            }
             yield new Promise((resolve) => setTimeout(resolve, res.status === 429 ? 350 : 100));
             continue;
           }
@@ -481,10 +499,11 @@ function findBestMatch(subjects, tmdbTitle, tmdbYear, mediaType, requestedSeason
     let normTitle = normalizeTitle(title);
     if (!normTitle)
       continue;
-    const seasonSuffix = String(title || "").match(/(?:^|\s)(?:s\s*|season\s*)(\d+)\s*$/i);
+    const seasonSuffix = String(title || "").match(/(?:^|\s)(?:season\s*|s\s*)(\d+)\s*(?:[-–]\s*(?:season\s*|s\s*)?(\d+))?\s*$/i);
     if (seasonSuffix) {
-      const titleSeason = Number(seasonSuffix[1]);
-      if (targetType !== 2 || requestedSeason == null || titleSeason !== Number(requestedSeason))
+      const firstSeason = Number(seasonSuffix[1]);
+      const lastSeason = Number(seasonSuffix[2] || seasonSuffix[1]);
+      if (targetType !== 2 || requestedSeason == null || Number(requestedSeason) < firstSeason || Number(requestedSeason) > lastSeason)
         continue;
       normTitle = normalizeTitle(String(title).slice(0, seasonSuffix.index));
     }
@@ -623,9 +642,9 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
                 url: finalStreamUrl,
                 quality,
                 headers: __spreadValues({
-                  "Referer": `${API_BASE}/`,
+                  "Referer": MOVIEBOX_STREAM_REFERER,
                   "User-Agent": userAgent
-                }, signCookie ? { "Cookie": signCookie } : {}),
+                }, signCookie ? { "Cookie": signCookie.split(";").map((part) => part.trim()).filter(Boolean).join("; ") } : {}),
                 subtitles,
                 provider: "moviebox"
               });
@@ -674,7 +693,6 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
                       url: resourceUrl,
                       quality,
                       headers: {
-                        "Referer": `${API_BASE}/`,
                         "User-Agent": userAgent
                       },
                       provider: "moviebox"
@@ -711,7 +729,9 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
                 title: `${mediaTitle}${season > 0 ? ` S${season}E${episode}` : ""} (${item.lang}) - ${quality} [${getFormatType(resourceUrl)}]`,
                 url: resourceUrl,
                 quality,
-                headers: { "Referer": `${API_BASE}/`, "User-Agent": userAgent },
+                // Recovered direct CDN files reject the API-site Referer and
+                // can return 429; upstream MovieBox-TUI forwards UA only here.
+                headers: { "User-Agent": userAgent },
                 subtitles,
                 provider: "moviebox"
               });

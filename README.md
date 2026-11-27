@@ -48,6 +48,7 @@ In Morrow, open **Settings → Providers → Install Morrow Providers**. For man
 - ≡ƒ¬¿ VidRock
 - ZinkMovies
 - ≡ƒ½░ OnlyKDrama
+- DramaChi
 
 ## Playback status
 
@@ -65,3 +66,5 @@ RiveStream and CinemaBZ implementations use their actual public site APIs. They 
 ## Third-party attribution
 
 `providers/streamflix.js` is adapted from `michat88/nuvio-providers` under GPL-3.0. Its upstream license text is included in `LICENSES/GPL-3.0.txt`. Morrow injects the TMDB API key at runtime; no upstream key is embedded in this adapter.
+
+`providers/dramachi.js` is a Morrow implementation of the public DramaChi API flow documented in [MovieBox-TUI](https://github.com/mesamirh/MovieBox-TUI), which is dual-licensed under MIT and Apache-2.0. It is limited to exact TV episode requests and exposes available dubbed versions separately.
