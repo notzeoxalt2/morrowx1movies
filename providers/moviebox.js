@@ -63,7 +63,7 @@ var __async = (__this, __arguments, generator) => {
 };
 
 // src/moviebox/constants.js
-var API_BASE = "https://api3.aoneroom.com";
+var API_BASE = "https://api6.aoneroom.com";
 var MOVIEBOX_STREAM_REFERER = "https://sportslive.wine";
 var API_HOSTS = [
   "https://api6.aoneroom.com",
@@ -87,9 +87,9 @@ var BRAND_MODELS = {
 };
 var TOKEN_URL = "https://apig.inmoviebox.com/wefeed-mobile-bff/tab/ranking-list?tabId=0&categoryType=4516404531735022304&page=1&perPage=1";
 var PACKAGE_INFO = {
-  package_name: "com.community.mbox.in",
-  version_name: "4.0.03.0920.03",
-  version_code: 50020130
+  package_name: "com.community.oneroom",
+  version_name: "4.0.01.0813.03",
+  version_code: 50020119
 };
 
 // src/moviebox/utils.js
@@ -103,6 +103,11 @@ var SECRET_KEY_ALT = import_crypto_js.default.enc.Base64.parse(
 var deviceId = "";
 var selectedBrand = "";
 var selectedModel = "";
+var selectedAndroid = "";
+var selectedBuild = "";
+var selectedTimezone = "";
+var gaid = "";
+var forwardedIp = "";
 var bearerToken = null;
 function decodeJwtExpiry(token) {
   try {
@@ -134,7 +139,7 @@ function getCachedToken() {
     // Match the current MovieBox-TUI client: visitor-login is the primary
     // session bootstrap. The old ranking-list x-user fallback can return a
     // token that still searches but only yields upgrade/notice resources.
-    const login = yield movieBoxRequest("POST", "https://api3.aoneroom.com/wefeed-mobile-bff/user-api/visitor-login", "{}", {}, true);
+    const login = yield movieBoxRequest("POST", `${API_BASE}/wefeed-mobile-bff/user-api/visitor-login`, "{}", {}, true);
     const loginPayload = login && login.data;
     const loginData = loginPayload && (loginPayload.data || loginPayload);
     const loginToken = loginData && (loginData.token || loginData.accessToken);
@@ -169,11 +174,29 @@ function initializeSession() {
     for (let i = 0; i < 32; i++) {
       deviceId += chars[Math.floor(Math.random() * 16)];
     }
-    const brands = Object.keys(BRAND_MODELS);
-    selectedBrand = brands[Math.floor(Math.random() * brands.length)];
-    const models = BRAND_MODELS[selectedBrand];
-    selectedModel = models[Math.floor(Math.random() * models.length)];
+    const devices = [
+      ["9", "PQ3A.190605.03081104", "23078RKD5C", "Redmi"],
+      ["10", "QP1A.191005.007.A3", "2201117TY", "Redmi"],
+      ["11", "RP1A.200720.011", "2201117TG", "Redmi"],
+      ["12", "S1B.220414.015", "22101316G", "Redmi"],
+      ["13", "TQ2A.230405.003", "M2012K11AG", "Redmi"]
+    ];
+    const device = devices[Math.floor(Math.random() * devices.length)];
+    selectedAndroid = device[0];
+    selectedBuild = device[1];
+    selectedModel = device[2];
+    selectedBrand = device[3];
+    selectedTimezone = ["Asia/Kolkata", "Asia/Shanghai", "Asia/Dubai", "Asia/Tokyo", "America/New_York", "Europe/London"][Math.floor(Math.random() * 6)];
+    gaid = `${randomHex(8)}-${randomHex(4)}-${randomHex(4)}-${randomHex(4)}-${randomHex(12)}`;
+    const prefixes = ["103.241", "49.36", "117.195", "106.198", "122.162", "157.32", "182.70", "103.58", "27.60", "59.90"];
+    forwardedIp = `${prefixes[Math.floor(Math.random() * prefixes.length)]}.${1 + Math.floor(Math.random() * 253)}.${1 + Math.floor(Math.random() * 253)}`;
   }
+}
+function randomHex(length) {
+  let value = "";
+  const chars = "0123456789abcdef";
+  for (let i = 0; i < length; i++) value += chars[Math.floor(Math.random() * chars.length)];
+  return value;
 }
 function md5(input) {
   return import_crypto_js.default.MD5(input).toString(import_crypto_js.default.enc.Hex);
@@ -267,28 +290,32 @@ function movieBoxRequest(_0, _1) {
       const xTrSignature = generateXTrSignature(method, accept, headerContentType, requestUrl, body, false, timestamp);
       const xClientInfo = JSON.stringify(__spreadProps(__spreadValues({}, PACKAGE_INFO), {
         os: "android",
-        os_version: "14",
+        os_version: selectedAndroid,
+        install_ch: "ps",
         device_id: deviceId,
         install_store: "official",
-        gaid: "1b2212c1-dadf-43c3-a0c8-bd6ce48ae22d",
+        gaid,
         brand: selectedBrand.toLowerCase(),
         model: selectedModel,
         system_language: "en",
-        net: "NETWORK_WIFI",
+        net: Math.random() < 0.5 ? "NETWORK_WIFI" : "NETWORK_MOBILE",
         region: "IN",
-        timezone: "Asia/Calcutta",
-        sp_code: "",
+        timezone: selectedTimezone,
+        sp_code: "40401",
+        "X-Play-Mode": "2",
         "X-Client-Build": xClientBuild
       }));
       const headers = __spreadValues({
         "Accept": accept,
         "Content-Type": headerContentType,
+        "Connection": "keep-alive",
         "x-client-token": xClientToken,
         "x-tr-signature": xTrSignature,
         "x-client-build": xClientBuild,
-        "User-Agent": `${PACKAGE_INFO.package_name}/${PACKAGE_INFO.version_code} (Linux; U; Android 14; en_IN; ${selectedModel}; Build/UD1A.230803.041; Cronet/145.0.7582.0)`,
+        "User-Agent": `${PACKAGE_INFO.package_name}/${PACKAGE_INFO.version_code} (Linux; U; Android ${selectedAndroid}; en_US; ${selectedModel}; Build/${selectedBuild}; Cronet/135.0.7012.3)`,
         "x-client-info": xClientInfo,
-        "x-client-status": "0"
+        "x-client-status": "0",
+        "x-forwarded-for": forwardedIp
       }, customHeaders);
       if (cachedToken) headers["Authorization"] = `Bearer ${cachedToken}`;
       const options = { method, headers };
@@ -471,7 +498,7 @@ function getStreams(tmdbId, mediaType, seasonNum = 1, episodeNum = 1) {
 function searchMovieBox(query) {
   return __async(this, null, function* () {
     const url = `${API_BASE}/wefeed-mobile-bff/subject-api/search/v2`;
-    const body = JSON.stringify({ page: 1, perPage: 20, keyword: query, restrictKid: 1 });
+    const body = JSON.stringify({ keyword: query, page: 1, perPage: 15, subjectType: 0 });
     const response = yield movieBoxRequest("POST", url, body);
     if (response && response.data && response.data.data && response.data.data.results) {
       let allSubjects = [];
@@ -546,8 +573,24 @@ function isUnsupportedMovieBoxHost(value) {
   }
 }
 function movieBoxResourceListUrl(subjectId, season, episode) {
-  const base = `${API_BASE}/wefeed-mobile-bff/subject-api/resource/v2?subjectId=${encodeURIComponent(subjectId)}&page=1&perPage=20&all=0&startPosition=1&endPosition=1&pagerMode=2&resolution=0`;
-  return season > 0 && episode > 0 ? `${base}&se=${season}&epFrom=${episode}&epTo=${episode}&isVip=true` : `${base}&isVip=true`;
+  const query = new URLSearchParams({ subjectId: String(subjectId), page: "1", perPage: "20" });
+  if (season > 0 && episode > 0) {
+    query.set("se", String(season));
+    query.set("ep", String(episode));
+  }
+  return `${API_BASE}/wefeed-mobile-bff/subject-api/resource?${query.toString()}`;
+}
+function movieBoxResourceListFallbackUrl(subjectId, season, episode) {
+  const query = new URLSearchParams({
+    subjectId: String(subjectId), page: "1", perPage: "20", all: "0",
+    startPosition: "1", endPosition: "1", pagerMode: "2", resolution: "0", isVip: "true"
+  });
+  if (season > 0 && episode > 0) {
+    query.set("se", String(season));
+    query.set("epFrom", String(episode));
+    query.set("epTo", String(episode));
+  }
+  return `${API_BASE}/wefeed-mobile-bff/subject-api/resource/v2?${query.toString()}`;
 }
 function movieBoxResourcePositionUrl(subjectId, resourceId, failedUrl) {
   const query = new URLSearchParams({ subjectId: String(subjectId), resourceId: String(resourceId), failUrl: String(failedUrl), failCode: "404", resourceNum: "0", isVip: "true" });
@@ -562,9 +605,11 @@ function movieBoxResourceItems(response) {
 function recoverMovieBoxResource(subjectId, resourceId, failedUrl, season, episode) {
   return __async(this, null, function* () {
     const path = movieBoxResourcePositionUrl(subjectId, resourceId, failedUrl).replace(API_BASE, "");
+    const attempts = [];
     for (const host of API_HOSTS) {
       const response = yield movieBoxRequest("GET", `${host}${path}`, null);
-      const recovered = movieBoxResourceItems(response).find((candidate) => {
+      const candidates = movieBoxResourceItems(response);
+      const recovered = candidates.find((candidate) => {
         const candidateId = candidate.resourceId != null ? String(candidate.resourceId) : String(candidate.id || "");
         const candidateSeason = Number(candidate.se != null ? candidate.se : 0);
         const candidateEpisode = Number(candidate.ep != null ? candidate.ep : 0);
@@ -572,9 +617,12 @@ function recoverMovieBoxResource(subjectId, resourceId, failedUrl, season, episo
         return candidateId === String(resourceId) && candidateSeason === season && candidateEpisode === episode &&
           !!candidateUrl && !isMovieBoxPlaceholderUrl(candidateUrl) && !isUnsupportedMovieBoxHost(candidateUrl);
       });
-      if (recovered)
+      attempts.push(`${host.replace("https://", "").replace("http://", "")}:${candidates.length}`);
+      if (recovered) {
         return recovered;
+      }
     }
+    console.log(`[MovieBox] Resource-position recovery for S${season}E${episode} id=${resourceId}: ${attempts.join(", ")}`);
     return null;
   });
 }
@@ -604,7 +652,8 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
       return priority(a.lang) - priority(b.lang);
     });
     const allStreams = [];
-    const userAgent = `${PACKAGE_INFO.package_name}/${PACKAGE_INFO.version_code} (Linux; U; Android 14; en_IN; Pixel 8; Build/UD1A.230803.041; Cronet/145.0.7582.0)`;
+    initializeSession();
+    const userAgent = `${PACKAGE_INFO.package_name}/${PACKAGE_INFO.version_code} (Linux; U; Android ${selectedAndroid}; en_US; ${selectedModel}; Build/${selectedBuild}; Cronet/135.0.7012.3)`;
     const subjectStreams = yield Promise.all(subjectIds.map(async (item, subjectIndex) => {
       const itemStreams = [];
       let recoveryAttempts = 0;
@@ -652,8 +701,23 @@ function getStreamLinks(subjectId, season = 0, episode = 0, mediaTitle = "", med
             }
           }
           if (!hasValidStream) {
-            const resourceRes = await movieBoxRequest("GET", movieBoxResourceListUrl(item.id, season, episode), null);
-            const fallbackItems = movieBoxResourceItems(resourceRes);
+            const resourceUrls = [
+              movieBoxResourceListUrl(item.id, season, episode),
+              movieBoxResourceListFallbackUrl(item.id, season, episode)
+            ];
+            const resourceCandidates = (await Promise.all(
+              resourceUrls.map((resourceUrl) => movieBoxRequest("GET", resourceUrl, null))
+            )).map((response) => ({ response, items: movieBoxResourceItems(response) }));
+            const exactEpisodeCount = (items) => items.filter((resource) => {
+                const resourceSeason = Number(resource.se != null ? resource.se : 0);
+                const resourceEpisode = Number(resource.ep != null ? resource.ep : 0);
+                return (season === 0 && episode === 0) || (resourceSeason === season && resourceEpisode === episode);
+            }).length;
+            resourceCandidates.sort((left, right) =>
+              exactEpisodeCount(right.items) - exactEpisodeCount(left.items) || right.items.length - left.items.length
+            );
+            const resourceRes = resourceCandidates[0] && resourceCandidates[0].response;
+            const fallbackItems = resourceCandidates[0] ? resourceCandidates[0].items : [];
             const fallbackSummary = fallbackItems.slice(0, 5).map((resource) => {
               let host = "";
               try { host = new URL(String(resource.resourceLink || resource.url || "")).hostname; } catch (e) {}

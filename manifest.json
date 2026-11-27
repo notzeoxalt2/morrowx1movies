@@ -1,13 +1,13 @@
 {
   "name": "Morrow Movies & TV",
-  "version": "1.7.5",
+  "version": "1.7.7",
   "description": "Morrow movie and TV adapters. Exact title/season/episode and native playback findings are listed in PROVIDER_STATUS.md.",
   "scrapers": [
     {
       "id": "4khdhub",
       "name": "4KHDHub",
       "description": "4KHDHub direct links",
-      "version": "1.6.3",
+      "version": "1.6.5",
       "author": "Nuvio Team",
       "supportedTypes": [
         "movie",
@@ -75,7 +75,7 @@
       "id": "moviebox",
       "name": "MovieBox",
       "description": "MovieBox streaming with multiple language support (DASH + MP4)",
-      "version": "1.6.3",
+      "version": "1.6.5",
       "author": "Nuvio Team",
       "supportedTypes": [
         "movie",
